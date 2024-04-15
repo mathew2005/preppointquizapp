@@ -112,8 +112,8 @@ def editProfile(request):
         user_object.save()
 
         # location , bio, gender
-        user_profile.location = request.POST.get('location')
-        user_profile.gender = request.POST.get('gender')
+        # user_profile.location = request.POST.get('location')
+        # user_profile.gender = request.POST.get('gender')
         user_profile.bio = request.POST.get('bio')
         user_profile.save()
 
