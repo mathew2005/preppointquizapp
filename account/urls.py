@@ -8,4 +8,7 @@ urlpatterns = [
     path('delete', views.deleteProfile, name='delete_profile'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('verify/<str:uidb64>/<str:token>/', views.verify_email, name='verify_email'),
+
+
 ]

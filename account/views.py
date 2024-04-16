@@ -5,15 +5,52 @@ from django.contrib.auth.models import User, auth
 from .models import Profile
 from quiz.models import QuizSubmission
 
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import send_mail
+# from django.contrib import messages
 
+# from django.contrib.auth.tokens import default_token_generator
+# from django.utils.encoding import force_str
+# from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth import get_user_model
+# from django.shortcuts import render, redirect
+# from django.contrib import messages
+
+# from django.conf import settings
 # Create your views here.
 
+from django.http import HttpResponse
+
+
+
+User = get_user_model()
+def verify_email(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        # Mark the user as active (email verified)
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Your email has been verified. You can now log in.')
+        return redirect('login')  # Redirect to login page or any other page
+
+    # If verification fails, show an error message
+    messages.error(request, 'Invalid verification link. Please try again or contact support.')
+    return redirect('login')  # Redirect to login page or any other page
 
 
 def register(request):
     if request.user.is_authenticated:
         return redirect('profile', request.user.username)
-
 
     if request.method == "POST":
         email = request.POST['email']
@@ -22,31 +59,39 @@ def register(request):
         password2 = request.POST['password2']
 
         if password == password2:
-            # check if email is not same
             if User.objects.filter(email=email).exists():
                 messages.info(request, "Email Already Used. Try to Login.")
                 return redirect('register')
             
-            # check if username is not same
             elif User.objects.filter(username=username).exists():
                 messages.info(request, "Username Already Taken.")
                 return redirect('register')
             
             else:
-                # create user
                 user = User.objects.create_user(username=username, email=email, password=password)
+                user.is_active = False  # User is not active until email is verified
                 user.save()
 
-                # log in the user and redirect to profile
-                user_login = auth.authenticate(username=username, password=password)
-                auth.login(request, user_login)
+                # Send verification email
+                current_site = get_current_site(request)
+                mail_subject = 'Activate your account'
+                html_message = render_to_string('verification_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+                to_email = [email]
+                send_mail(mail_subject, None, None, to_email, html_message=html_message)
 
+                messages.success(request, 'Please check your email to verify your account.')
 
                 # create profile for new user
                 user_model = User.objects.get(username=username)
                 new_profile = Profile.objects.create(user=user_model)
                 new_profile.save()
-                return redirect('profile', username)
+                # return redirect('profile', username)
+                return redirect('login')
         else:
             messages.info(request, "Password Not Matching.")
             return redirect('register')

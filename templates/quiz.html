@@ -27,9 +27,9 @@
                     Question {{forloop.counter}}
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{question.text}}</p>
+                    <p class="card-text">{{question.text|safe}}</p>
                     {% for option in question.choice_set.all %}
-                    
+                     
                     <div class="form-check">
                         <label class="form-check-label" for="{{option.id}}">
                             <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">

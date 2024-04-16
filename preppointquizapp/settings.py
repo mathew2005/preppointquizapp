@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+# import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,6 +25,9 @@ SECRET_KEY = 'django-insecure-#4v#e4ur8=n!2yz@%t)=_05b@_)^w&)uh+fcc=m_9du4&9+pm_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# mail = os.environ.get('MAIL')
+# mail_pass = os.environ.get('PASSWORD')
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -34,6 +37,7 @@ EMAIL_HOST_USER = "test.mailed.login@gmail.com"
 EMAIL_HOST_PASSWORD = "dtdbhapyjwpelknq"
 # EMAIL_HOST_PASSWORD = mail_pass
 DEFAULT_FROM_EMAIL = "test.mailed.login@gmail.com"
+# DEFAULT_FROM_EMAIL = mail
 LOGIN_REDIRECT_URL = "/"
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
