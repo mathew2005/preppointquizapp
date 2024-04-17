@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from account.models import Profile
+# from account.models import Profile
 from quiz.models import UserRank, Quiz, QuizSubmission, Question
 from django.contrib.auth.decorators import login_required, user_passes_test
 import datetime
