@@ -40,8 +40,8 @@ DEFAULT_FROM_EMAIL = "test.mailed.login@gmail.com"
 # DEFAULT_FROM_EMAIL = mail
 LOGIN_REDIRECT_URL = "/"
 
-ALLOWED_HOSTS = ["localhost"]
-
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
 
@@ -56,10 +56,13 @@ INSTALLED_APPS = [
     'base',
     'quiz',
     'ckeditor',
+    "debug_toolbar",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.telegram',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 
@@ -72,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'preppointquizapp.urls'
@@ -165,3 +169,35 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'telegram': {
+        'APP': {
+            'client_id': '6971899914',
+            'secret': '6971899914:AAHKFFqN6LDSj8B-XowvEECMNRRjyGknPBA',
+        },
+        'AUTH_PARAMS': {'auth_date_validity': 30},
+    },
+    'facebook': {
+        'METHOD': 'oauth2',  # Set to 'js_sdk' to use the Facebook connect SDK
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+    }
+}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-# from account.models import Profile
+from user.models import Profile
 from quiz.models import UserRank, Quiz, QuizSubmission, Question
 from django.contrib.auth.decorators import login_required, user_passes_test
 import datetime
@@ -26,7 +26,7 @@ def home(request):
     return render(request, 'welcome.html', context)
 
 
-@login_required(login_url="login")
+@login_required(login_url="account_login")
 def leaderboard_view(request):
 
     user_object = User.objects.get(username=request.user)
@@ -42,7 +42,7 @@ def is_superuser(user):
     return user.is_superuser
 
 @user_passes_test(is_superuser)
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def dashboard_view(request):
 
     user_object = User.objects.get(username=request.user)
@@ -122,7 +122,7 @@ def blogs_view(request):
         context = {"year_blog_count": year_blog_count, "blogs": blogs}
     return render(request, "blogs.html", context)
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def blog_view(request, blog_id):
 
     user_object = User.objects.get(username=request.user)
@@ -133,7 +133,7 @@ def blog_view(request, blog_id):
     context = {"user_profile": user_profile, "blog": blog}
     return render(request, "blog.html", context)
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def contact_view(request):
 
     user_object = User.objects.get(username=request.user)
@@ -156,7 +156,7 @@ def contact_view(request):
     return render(request, "contact.html", context)
 
 @user_passes_test(is_superuser)
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def message_view(request, id):
 
     user_object = User.objects.get(username=request.user)
@@ -182,7 +182,7 @@ def terms_conditions_view(request):
         context = {}
     return render(request, "terms-conditions.html", context)
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def downloads_view(request):
 
     user_object = User.objects.get(username=request.user)

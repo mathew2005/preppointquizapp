@@ -10,9 +10,9 @@
         <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-primary">
             <img src="{{user_profile.profile_img.url}}" class="rounded-circle" width="25" height="25" alt="profile_img">
         </a>
-        <a href="{% url 'logout' %}" class="btn btn-outline-primary"><i class="bi bi-box-arrow-left"></i></a>
+        <a href="{% url 'account_logout'%}" class="btn btn-outline-primary"><i class="bi bi-box-arrow-left"></i></a>
         {% else %}
-        <a href="accounts/login" class="btn btn-outline-primary"><i class="bi bi-box-arrow-right"></i></a>
+        <a href="{% url 'account_login' %}" class="btn btn-outline-primary"><i class="bi bi-box-arrow-right"></i></a>
         {% endif %}
     </div>
 </div>
@@ -62,9 +62,9 @@
                 <a href="{% url 'profile' request.user.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="@{{request.user.username}}" class="mx-2">
                     <img src="{{user_profile.profile_img.url}}" class="rounded-circle" width="40" height="40" alt="profile_img">
                 </a>
-                <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+                <a href="{% url 'account_logout'%}" class="btn btn-primary">Logout</a>
                 {% else %}
-                <a href="accounts/login" class="btn btn-primary ms-2">Login</a>
+                <a href="{% url 'account_login' %}" class="btn btn-primary ms-2">Login</a>
                 {% endif %}
             </form>
         </div>
