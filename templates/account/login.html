@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% block title %}Login Page - Prep point{% endblock title %}
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+</head>
+
+<body>
+    <div id="login-container">
+        <div id="student-container">
+
+            <img src="{% static 'images/prep.png' %}" id="student">
+            <div id="student-text">
+                <div id="text-container">
+
+                    <h3>Exam Mastery Hub</h3>
+                    <p>Unleash your academic success with Exam Mastery Hub's exam excellence platform</p>
+                </div>
+            </div>
+        </div>
+        <div id="form-container">
+            
+            
+            <form class="login" method="POST" action="{% url 'account_login' %}" id="login-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div id="input-container">
+            <div class="logo-container">
+                
+                <a href="/" id="logo-link">
+    <img src="{% static 'Images/logo.svg'%}" alt="prep point logo" id="logo">
+</a>
+    <h2 id="logo-paragraph"><a href="/">PREP POINT</a></h2>
+            </div>
+            {% for message in messages %}
+            <div class="error-container">
+                <i class="fa-regular fa-circle-xmark" style="margin-right: 0.5rem;"></i>
+                <h5>{{message}}</h5>
+            </div>
+            {% endfor %}
+            <div>
+                
+                <h4 class="hidden-text">Exam Mastery Hub</h4>
+                <p class="hidden-text main-text">Unleash your academic success with Exam Mastery Hub's exam excellence platform</p> 
+                {% if redirect_field_value %}
+                <input type="hidden"  required name="{{ redirect_field_name}}" value="{{ redirect_field_value}}" id="username">
+                {% endif %}
+               
+                
+                
+                
+                <button type="submit">Log in </button>
+            </div>
+                
+                <p>Are you new? <a href="{% url 'account_signup' %}" id="signup">Create an Account</a></p>
+                
+            </div>
+    
+    </form>
+</div>
+    
+</div>
+
+</body>
+</html>
+
+
+{% endblock %}

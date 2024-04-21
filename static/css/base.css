@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'GigaSansRegular';
+    src: url('../assets/GigaSansRegular.otf');
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+*{
+    --primary-color: #407BFF;
+    --secondary-color: #b3cbff;
+    /* --background-color: #e9efff; */
+    /* --background-color :#bed2ff; */
+    --background-color :rgb(250,251,255);
+
+    --inputandbuttonheight: 2.5rem;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.hidden-text{
+    display: none;
+}
+body{
+    font-family: 'GigaSansRegular', 'sanserif';
+    background: var(--secondary-color);
+
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
