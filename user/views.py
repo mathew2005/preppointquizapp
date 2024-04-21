@@ -29,30 +29,7 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from allauth.account.signals import user_signed_up
-from .models import Profile
-
 User = get_user_model()
-
-
-    
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
-
-@receiver(user_signed_up)
-def user_signed_up_handler(request, user, **kwargs):
-    # This function is called when a user signs up
-    # You can create a profile for the user here
-     if not hasattr(user, 'profile'):
-        Profile.objects.create(user=user)
 
 # def verify_email(request, uidb64, token):
 #     try:

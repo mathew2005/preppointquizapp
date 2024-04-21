@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, verbose_name='User Object') #verbose_name
     bio = models.TextField(max_length=500, blank=True)
-    profile_img = models.ImageField(upload_to='profile_images', default='profile_images/user.png', blank=True, null=True, verbose_name='Profile Pic')
-    # profile_img = models.ImageField(upload_to='profile_images/', blank=True, default='images/user.png')
+    profile_img = models.ImageField(upload_to='profile_images/', blank=True)
     # email_address = models.CharField(max_length=55, unique=True, null=True, verbose_name='Email')
     # bio = models.TextField(blank=True, null=True)
+    # profile_img = models.ImageField(upload_to='profile_images', default='user.png', blank=True, null=True, verbose_name='Profile Pic')
     # # location = models.CharField(max_length=100, blank=True, null=True)
     # # GENDER = (
     #     # ('Male', 'Male'),
