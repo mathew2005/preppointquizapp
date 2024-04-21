@@ -22,6 +22,7 @@ class Blog(models.Model):
     )
     status = models.CharField(max_length=7, choices=STATUS)
     created_at = models.DateTimeField(auto_created=True)
+    title_image = models.ImageField(upload_to='blog_images', null=False, blank=False)
 
     def __str__(self):
         return self.title

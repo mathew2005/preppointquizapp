@@ -14,6 +14,7 @@
             {% if blog.created_at|date:"Y" == year_count.year|stringformat:"s" %}
             <li class="d-flex justify-content-between mb-2">
                 <a href="{% url 'blog' blog.id %}">{{blog.title}}</a>
+                <img style="max-width: 10rem;" src="{{ blog.title_image.url }}" alt="{{ blog.title }}">
                 <span class="text-secondary">{{blog.created_at}}</span>
             </li>
             {% endif %}
