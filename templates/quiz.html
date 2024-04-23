@@ -67,6 +67,9 @@
     var timerSpan = document.getElementById("timer");
     var quizForm = document.getElementById("quiz-form");
     var questions = document.querySelectorAll(".question");
+    // var options = document.querySelectorAll(".form-check-input");
+    // var optionsArray = [...options];
+
     var userScoreInput = document.getElementById("user-score");
 
     quizDuration = (questions.length) * 60; // convert in seconds
@@ -85,7 +88,7 @@
             submitQuiz();
         } else if (document.getElementById("message-div")) {
             clearTimeout(quizTimerId);
-            highlightCorrectAnswers();
+            highlightAnswersandExplanation();
         } else {
             // decrement the timer value by 1s
             quizDuration--;
@@ -120,11 +123,9 @@
         userScoreInput.value = score;
     }
 
-    function showExplanation(){
-        
-    }
+   
 
-    function highlightCorrectAnswers() {
+    function highlightAnswersandExplanation() {
         questions.forEach(question => {
             
             // highlight correct answer while showing result
@@ -140,9 +141,8 @@
 
         // disable submit button
         submitButton.disabled = true;
-
-        // disabel all options
-        var options = document.querySelectorAll(".form-check-input");
+        var options = document.querySelectorAll(".form-check-input")
+        // disable all options
         options.forEach(option => {
             option.disabled = true;
         });
@@ -153,6 +153,37 @@
 
     // Timer Interval
     quizTimerId = setInterval(updateTimer, 1000);
+
+
+    // let allChoices = document.querySelectorAll('.form-check-input');
+    // allChoices.forEach(choice => choice.addEventListener('click', submitAnswersImmediately)) 
+    
+    // to see the answers right away after choosing.
+//    function submitAnswersImmediately() {
+       
+//     optionsArray.filter(option =>{
+//     // check if there is a selected option by the user on the quiz
+//         if (option.checked){
+//             // get the specific question where the student selected option
+//                let question = option.parentElement.parentElement.parentElement.parentElement
+
+//                //reveal the correct answer for the answered question and add styling to it.
+//                var correctAnswer = question.querySelector(".correct-answer");
+//             correctAnswer.previousElementSibling.querySelector("input").classList.add("bg-success");
+//             correctAnswer.previousElementSibling.classList.add("fw-bold");
+        
+//             //show explanation for the answered question 
+//             var explanation = question.querySelector(".explanation");
+//             explanation.classList.remove('hidden');
+//             let questionOptions = question.querySelectorAll('.form-check-input');
+//             //disable all choices for the answered question
+//             questionOptions.forEach(option => option.disabled = true)
+        
+//         }
+//     })
+ 
+// }
+    
 </script>
 
 

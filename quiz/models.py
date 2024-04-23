@@ -8,8 +8,9 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=15)
-
+    name = models.CharField(max_length=50)
+    # timer = models.IntegerField()
+    
     class Meta:
         verbose_name_plural = 'Categories'
 
