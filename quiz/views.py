@@ -6,7 +6,8 @@ from .models import Quiz, Category
 from django.db.models import Q
 from quiz.models import QuizSubmission
 from django.contrib import messages
-
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 @login_required(login_url='account_login')
@@ -48,34 +49,42 @@ def search_view(request, category):
 
 @login_required(login_url='account_login')
 def quiz_view(request, quiz_id):
-
     user_object = User.objects.get(username=request.user)
     user_profile = Profile.objects.get(user=user_object)
 
     quiz = Quiz.objects.filter(id=quiz_id).first()
+    
+    if quiz != None:
+        context = {"user_profile": user_profile, "quiz": quiz}
+    else:
+        return redirect('all_quiz')
 
     total_questions = quiz.question_set.all().count()
 
     if request.method == "POST":
         
         # Get the score
-        score = int(request.POST.get('score', 0))
+        score = request.POST['score']
+
 
         # Check if the user has already submiited the quiz
         if QuizSubmission.objects.filter(user=request.user, quiz=quiz).exists():
-            messages.success(request, f"This time you got {score} out of {total_questions}")
-            return redirect('quiz', quiz_id)
-        
-        # save the new quiz submission
-        submission = QuizSubmission(user=request.user, quiz=quiz, score=score)
-        submission.save()
+            submission = get_object_or_404(QuizSubmission, user=request.user, quiz=quiz)
+            submission.score = score
+            submission.save()
+          
+        else:
+            submission = QuizSubmission(user=request.user, quiz=quiz, score=score)
+            submission.save()
 
-        # show the result in message
-        messages.success(request,f"Quiz Submitted Successfully. You got {score} out of {total_questions}")
-        return redirect('quiz', quiz_id)
-
-    if quiz != None:
-        context = {"user_profile": user_profile, "quiz": quiz}
-    else:
-        return redirect('all_quiz')
     return render(request, 'quiz.html', context)
+
+# def create(request,quiz_id):
+#     if request.method == "POST":
+#         quiz = Quiz.objects.filter(id=quiz_id).first()
+#         score = request.POST['score']
+#         if QuizSubmission.objects.filter(user=request.user, quiz=quiz).exists():
+#             messages.success(request, f"This time you got {score} out of {total_questions}")
+#             return redirect('quiz', quiz_id)
+#         submission = QuizSubmission(user=request.user, quiz=quiz, score=score)
+#         submission.save()

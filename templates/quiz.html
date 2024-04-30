@@ -18,40 +18,45 @@
             <h4 class="text-center text-success">{{message}}</h4>
         </div>
         {% endfor %}
+        <!-- javascript score message  -->
 
-
-        <div class="questions my-4">
-            {% for question in quiz.question_set.all %}
-            <div class="card mb-2 question">
-                <div class="card-header fw-bold">
-                    Question {{forloop.counter}}
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{question.text|safe}}</p>
-                    {% for option in question.choice_set.all %}
-                     
-                    <div class="form-check">
-                        <label class="form-check-label" for="{{option.id}}">
-                            <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">
-                            {{option.text}}
-                        </label>
-                        {% if option.is_correct %}
-                        <span class="visually-hidden correct-answer">{{option.text}}</span>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                    {% for explanation in question.explanation_set.all%}
-                    <span>
-
-                <div style="color: red" class="explanation hidden">Explanation: {{explanation.text}}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
+        <div id="score-div">
+            <h1 id="score" class="text-center text-success"></h1>
         </div>
+        <h5 class="text-sucess text-center"></h5>
 
-        <form action="" method="post" id="quiz-form">
+        
+        <form method="post" id="quiz-form">
             {% csrf_token %}
+            <div class="questions my-4">
+                {% for question in quiz.question_set.all %}
+                <div class="card mb-2 question">
+                    <div class="card-header fw-bold">
+                        Question {{forloop.counter}}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{question.text|safe}}</p>
+                        {% for option in question.choice_set.all %}
+                         
+                        <div class="form-check">
+                            <label class="form-check-label" for="{{option.id}}">
+                                <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">
+                                {{option.text}}
+                            </label>
+                            {% if option.is_correct %}
+                            <span class="visually-hidden correct-answer">{{option.text}}</span>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        {% for explanation in question.explanation_set.all%}
+                        <span>
+    
+                    <div style="color: red" class="explanation hidden">Explanation: {{explanation.text}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             <!-- hidden input field for score -->
             <input type="hidden" name="score" value="0" id="user-score">
 
@@ -62,6 +67,7 @@
     </div>
 
 <script>
+    
     // Elements
     var submitButton = document.getElementById("submit-button");
     var timerSpan = document.getElementById("timer");
@@ -70,7 +76,7 @@
     // var options = document.querySelectorAll(".form-check-input");
     // var optionsArray = [...options];
 
-    var userScoreInput = document.getElementById("user-score");
+    var userScoreInput = $('#user-score');
 
     quizDuration = (questions.length) * 60; // convert in seconds
     
@@ -79,7 +85,7 @@
         var minutes = Math.floor(quizDuration / 60);
         var seconds = quizDuration % 60;
 
-        timerSpan.innerText = minutes + "m" + seconds + 's';
+        timerSpan.innerText = `${minutes}:${seconds}`;
 
         // Check if the time ended
         if (quizDuration <= 0) {
@@ -88,7 +94,6 @@
             submitQuiz();
         } else if (document.getElementById("message-div")) {
             clearTimeout(quizTimerId);
-            highlightAnswersandExplanation();
         } else {
             // decrement the timer value by 1s
             quizDuration--;
@@ -99,20 +104,22 @@
     function submitQuiz() {
         // Calculate the score
         calculateScore();
+        highlightAnswersandExplanation();
 
         // Submit the quiz
-        quizForm.submit();
+        
+        // quizForm.submit();
     }
 
     // Check right answer and then calculate the score
     function calculateScore() {
         var score = 0;
-
+        var totalQuestions = 0;
         // Loop through each question
         questions.forEach(question => {
             var selectedInput = question.querySelector('input:checked');
             var correctAnswer = question.querySelector(".correct-answer").innerText;
-
+            totalQuestions += 1;
             // Check if the answer is correct or not
             if (selectedInput && selectedInput.value === correctAnswer) {
                 score += 1;
@@ -121,9 +128,14 @@
 
         // Update the hidden input field with score in form
         userScoreInput.value = score;
+        // console.log(score)
+        displayScore(score,totalQuestions);
     }
 
-   
+   function displayScore (score, totalQuestions){
+    let scoreText = document.querySelector('#score');
+    scoreText. textContent = `You got ${score} out of ${totalQuestions}`;
+   }
 
     function highlightAnswersandExplanation() {
         questions.forEach(question => {
@@ -149,7 +161,28 @@
     }
 
     // Attach Event Listener to Submit button
-    submitButton.addEventListener("click", submitQuiz);
+    $(document).on("submit", "#quiz-form", function(e){
+        e.preventDefault();
+        submitQuiz();
+        $.ajax({
+            type: "POST",
+            url: '',
+            data: {
+             score : userScoreInput.value,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data){
+                // console.log(data);
+            }
+            
+
+        })
+    })
+
+    // quizForm.addEventListener('submit', function(e){
+    //     e.preventDefault();
+    //     submitQuiz()
+    // });
 
     // Timer Interval
     quizTimerId = setInterval(updateTimer, 1000);
