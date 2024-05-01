@@ -3,8 +3,9 @@
 {% block title %}{{quiz.title}} - BrainBunny{% endblock title %}
 
 {% block content %}
+<input type="hidden" id="quiz-timer" value="{{ quizTimer }}">
 
-    <h1 class="display-4 text-center my-5">{{quiz.title}} - ({{quiz.question_set.all|length}})</h1>
+<h1 class="display-4 text-center my-5">{{quiz.title}} - ({{quiz.question_set.all|length}})</h1>
     <p class="fs-4 text-center container">{{quiz.description}}</p>
 
     <div class="container">
@@ -73,43 +74,16 @@
     var timerSpan = document.getElementById("timer");
     var quizForm = document.getElementById("quiz-form");
     var questions = document.querySelectorAll(".question");
+    var quizTimer = document.querySelector('#quiz-timer');
     // var options = document.querySelectorAll(".form-check-input");
     // var optionsArray = [...options];
 
     var userScoreInput = $('#user-score');
 
-    quizDuration = (questions.length) * 60; // convert in seconds
+    quizDuration = quizTimer.value;
+    // quizDuration = 13;
     
-    // Update Timer
-    function updateTimer() {
-        var minutes = Math.floor(quizDuration / 60);
-        var seconds = quizDuration % 60;
-
-        timerSpan.innerText = `${minutes}:${seconds}`;
-
-        // Check if the time ended
-        if (quizDuration <= 0) {
-            // Automatically Submit the quiz
-            clearTimeout(quizTimerId);
-            submitQuiz();
-        } else if (document.getElementById("message-div")) {
-            clearTimeout(quizTimerId);
-        } else {
-            // decrement the timer value by 1s
-            quizDuration--;
-        }
-    }
-
-    // Function to submit the quiz
-    function submitQuiz() {
-        // Calculate the score
-        calculateScore();
-        highlightAnswersandExplanation();
-
-        // Submit the quiz
-        
-        // quizForm.submit();
-    }
+    
 
     // Check right answer and then calculate the score
     function calculateScore() {
@@ -160,10 +134,14 @@
         });
     }
 
-    // Attach Event Listener to Submit button
-    $(document).on("submit", "#quiz-form", function(e){
-        e.preventDefault();
-        submitQuiz();
+
+    function submitQuiz(){
+        // calculate the user's score
+        calculateScore();
+        // highlight the answers and explanation
+        highlightAnswersandExplanation();
+        clearTimeout(quizTimerId);
+        //send ajax request to send score
         $.ajax({
             type: "POST",
             url: '',
@@ -172,11 +150,20 @@
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
             success: function(data){
-                // console.log(data);
+
+            },
+            error: function(){
+                console.error('Ajax request error, can\'t send score to user')
             }
             
 
         })
+    }
+    // Attach Event Listener to Submit button
+    
+    $(document).on("submit", "#quiz-form", function(e){
+        e.preventDefault()
+        submitQuiz()
     })
 
     // quizForm.addEventListener('submit', function(e){
@@ -184,9 +171,26 @@
     //     submitQuiz()
     // });
 
+    // Update Timer
+    function updateTimer() {
+
+        var minutes = Math.floor(quizDuration / 60);
+        var seconds = quizDuration % 60;
+        timerSpan.innerText = `${minutes}:${seconds}`;
+
+        // Check if the time ended
+        if (quizDuration <= 0) {
+            // Automatically Submit the quiz
+            clearTimeout(quizTimerId);
+            submitQuiz();
+        } else {
+            // decrement the timer value by 1s
+            quizDuration--;
+        }
+    }
     // Timer Interval
     quizTimerId = setInterval(updateTimer, 1000);
-
+    
 
     // let allChoices = document.querySelectorAll('.form-check-input');
     // allChoices.forEach(choice => choice.addEventListener('click', submitAnswersImmediately)) 

@@ -9,7 +9,7 @@ from django.dispatch import receiver
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    # timer = models.IntegerField()
+    
     
     class Meta:
         verbose_name_plural = 'Categories'
@@ -21,6 +21,7 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    quizTimer = models.IntegerField(verbose_name="Timer in minutes")
     quiz_file = models.FileField(upload_to='quiz/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

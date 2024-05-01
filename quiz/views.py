@@ -53,9 +53,11 @@ def quiz_view(request, quiz_id):
     user_profile = Profile.objects.get(user=user_object)
 
     quiz = Quiz.objects.filter(id=quiz_id).first()
-    
+    quizObject = get_object_or_404(Quiz, id=quiz_id)
+    quizTimer =quizObject.quizTimer
+    # quizTimer = quiz.quizTimer
     if quiz != None:
-        context = {"user_profile": user_profile, "quiz": quiz}
+        context = {"user_profile": user_profile, "quiz": quiz, "quizTimer" : quizTimer}
     else:
         return redirect('all_quiz')
 
