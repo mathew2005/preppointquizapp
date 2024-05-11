@@ -1,0 +1,10 @@
+#navigation{
+    background: var(--background-light-100);
+    background: red;
+    
+    
+}
+#navigation a {
+    color: var(--main-color-100);
+
+}

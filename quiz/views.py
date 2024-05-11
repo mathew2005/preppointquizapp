@@ -81,6 +81,11 @@ def quiz_view(request, quiz_id):
 
     return render(request, 'quiz.html', context)
 
+@login_required(login_url='account_login')
+def quiz_settings(request):
+    context = {}
+    return render(request, 'quiz_settings.html', context)
+
 # def create(request,quiz_id):
 #     if request.method == "POST":
 #         quiz = Quiz.objects.filter(id=quiz_id).first()

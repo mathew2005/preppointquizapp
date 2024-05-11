@@ -39,7 +39,7 @@ EMAIL_HOST_PASSWORD = "dtdbhapyjwpelknq"
 DEFAULT_FROM_EMAIL = "test.mailed.login@gmail.com"
 # DEFAULT_FROM_EMAIL = mail
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.231"]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition

@@ -1,0 +1,65 @@
+.form-check-input:checked ~ .choice-text{
+    font-weight: bold;
+    color: cyan;
+    transition: color 1s;
+}
+
+.form-check-input:focus { 
+    outline: none;
+}
+
+.quiz-image{
+ width: 10rem;
+ height: 10rem;
+ max-width: 100%;
+ background-image: url('https://picsum.photos/1920/1080');
+ background-position: center;
+ background-size: cover;
+ background-repeat: no-repeat;
+ margin: 1rem 0rem;
+}
+.cross-icon{
+transform: translateX(-20%);
+width: 1.4em;
+height: 1.5em;
+}
+  
+
+.question-text {
+    font-weight: 500;
+
+}
+
+.form-check-input {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid #1FBED6;
+  background-color: white;
+  
+}
+
+.form-check-input:focus { /*no need, if you don't disable default appearance*/
+  outline: none;
+   /*to remove the square border on focus*/
+}
+
+.form-check-input:checked { /*no need, if you don't disable default appearance*/
+  background: #1FBED6;
+}
+
+.form-check-input:checked ~ .choice-letter {
+  color: white;
+}
+
+.form-check-label .choice-letter {
+  position: relative;
+  left: -1.3em;
+  /* font-size: 15px; */
+  color: #1FBED6;
+}
+
+.form-check-label .choice-letter {
+  position: relative;
+  top: 0.38em;
+}
