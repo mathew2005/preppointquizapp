@@ -1,6 +1,14 @@
+*{
+  font-family: sans-serif;
+}
+:root{
+  --silver-main: #afafaf;
+}
+
 .form-check-input:checked ~ .choice-text{
-    font-weight: bold;
-    color: cyan;
+    /* font-weight: bold; */
+    color: rgb(0, 140, 255);
+    /* color: red; */
     transition: color 1s;
 }
 
@@ -12,18 +20,22 @@
  width: 10rem;
  height: 10rem;
  max-width: 100%;
- background-image: url('https://picsum.photos/1920/1080');
  background-position: center;
  background-size: cover;
  background-repeat: no-repeat;
  margin: 1rem 0rem;
 }
+
 .cross-icon{
-transform: translateX(-20%);
+transform: translate(50%,-5%);
 width: 1.4em;
-height: 1.5em;
+height: 1.4em;
 }
-  
+.check-icon{
+  transform: translate(42%,-10%);
+  width: 1.25em;
+  height: 1.25em;
+}
 
 .question-text {
     font-weight: 500;
@@ -34,18 +46,15 @@ height: 1.5em;
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  border: 2px solid #1FBED6;
+  border: 2px solid var(--silver-main);
   background-color: white;
   
 }
 
-.form-check-input:focus { /*no need, if you don't disable default appearance*/
-  outline: none;
-   /*to remove the square border on focus*/
-}
 
-.form-check-input:checked { /*no need, if you don't disable default appearance*/
+.form-check-input:checked {
   background: #1FBED6;
+  background:rgb(0, 140, 255);
 }
 
 .form-check-input:checked ~ .choice-letter {
@@ -53,13 +62,42 @@ height: 1.5em;
 }
 
 .form-check-label .choice-letter {
-  position: relative;
-  left: -1.3em;
-  /* font-size: 15px; */
-  color: #1FBED6;
+  position: absolute;
+  transform: translate(-145%, 25%);
+ 
+  /* left: -1.3em; */
+  /* left: -1.2em; */
+  color: var(--silver-main);
+  /* top: 0.38em; */
+  /* top: 0.37em; */
 }
 
-.form-check-label .choice-letter {
-  position: relative;
-  top: 0.38em;
+
+.form-check{
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  /* padding: 0.5rem 1.8rem; */
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+.form-check-label{
+  /* background: green; */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items:start
+
+}
+.choice-text{
+  /* background: purple; */
+  /* width: calc(100% - 1.5em ); */
+  width: 100%;
+  margin-top: 0.2em;
+}
+.choice-letter{
+  /* background: green; */
+
 }
