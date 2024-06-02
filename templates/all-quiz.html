@@ -1,8 +1,13 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block title %}All Quizzes - BrainBunny{% endblock title %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/all_quiz.css' %}">
+
+</head>
+<body>
 	<h1 class="display-4 text-center my-5">All Quizzes</h1>
 
 
@@ -25,23 +30,48 @@
 		<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
 			{% if quizzes|length > 0 %}
 			{% for quiz in quizzes %}
-			<div class="col">
-				<div class="card shadow-sm">
-					<div class="card-body">
-						<h4>{{quiz.title}}</h4>
-						<p class="card-text">Total Questions - {{quiz.question_set.all|length}}</p>
-						<p class="card-text">{{quiz.description|truncatewords:7}}</p>
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="btn-group">
-								<a href="{% url 'quiz' quiz.id %}" type="button" class="btn btn-sm btn-outline-success">Start
-									Quiz</a>
-							</div>
-							<small class="text-body-secondary">{{quiz.created_at|timesince}} ago</small>
-						</div>
+    <div class="col">
+        <div class="card shadow-sm quiz-information-container">
+            <div class="card-body">
+                <div class="information-container">
+					<div class="quiz-title-container">{{quiz.title}}</div>
+					<div class="number-container">
+		
+						<span class="number-text">{{quiz.question_set.all|length}}</span>
+						<input type="hidden" value="{{quiz.question_set.all|length}}" class="total-questions">
+						<div class="questions-text">Questions</div>
 					</div>
+					<div class="timer-container">
+		
+						<span class="timer timer-value">{{quiz.quizTimer}}</span>
+						<!-- <span class="timer">00:00</span> -->
+						<div class="timer-text">Minutes</div>
+					</div>
+					
 				</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    {% with quiz_submission=quiz.quizsubmission_set.first %}
+                        {% if quiz_submission %}
+
+							<div>Score: <span class="focus-text">{{ quiz_submission.score }}</span></div>
+                            <input type="hidden" value="{{quiz_submission.score}}" class="score-value">
+							<!-- Display other details from quiz_submission if needed -->
+                        {% else %}
+                            <div>Status: <span class="focus-text">Not taken</span></div>
+                        {% endif %}
+                    {% endwith %}
+                    <div class="btn-group">
+                        <a href="{% url 'quiz' quiz.id %}" type="button" class="btn btn-primary">Take Exam</a>
+                    </div>
+                </div>
+            </div>
+			<div class="score-progress-container">
+				<div class="score-progress-value"></div>
 			</div>
-			{% endfor %}
+        </div>
+    </div>
+{% endfor %}
+
 			{% else %}
 			<div class="col-lg-12 col-md-12 col-12">
 				<p class="text-center text-danger fs-5">There is no quiz available for this category or search.</p>
@@ -49,5 +79,10 @@
 			{% endif %}
 		</div>
 	</div>
+	<script src="{% static 'js/all_quiz.js' %}">
+
+	</script>
+</body>
+
 
 {% endblock content %}

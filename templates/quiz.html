@@ -7,33 +7,87 @@
     <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
 </head>
 <body>
-    
+    <input type="hidden" id="timerSwitch_value" value="{{ quiz_settings.timerSwitch }}">
+    <input type="hidden" id="quizChoiceFormat_value" value="{{ quiz_settings.quiz_choice_format }}">
+    <input type="hidden" id="quizQuestionFormat_value" value="{{ quiz_settings.quiz_question_format }}">
+    <input type="hidden" id="answeringFormat_value" value="{{ quiz_settings.answering_format }}">
     <input type="hidden" id="quiz-timer" value="{{ quizTimer }}">
-    
-<h1 class="display-4 text-center my-5">{{quiz.title}} - ({{quiz.question_set.all|length}})</h1>
-    <p class="fs-4 text-center container">{{quiz.description}}</p>
+
+<!-- back to top button  -->
+
+<div id="progress">
+    <span id="top-progress-value"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13 20h-2V8l-5.5 5.5l-1.42-1.42L12 4.16l7.92 7.92l-1.42 1.42L13 8v12Z"/></svg>
+    </span>
+</div>
+
+<div id="timer-progress">
+    <span id="timer-progress-value"><span class="timer" style="font-weight: 500"></span>
+    </span>
+</div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container">
+                <div class="content-container">
+
+                    <div class="circular-progress">
+                        
+                        <span class="progress-value">0%</span>
+                    </div>
+                    
+                    <span class="text">SCORE</span>
+                </div>
+                
+                <div class="content-container">
+
+                    <div class="circular-progress">
+                <span class="progress-value">
+                    <span class="timer">—:—</span>
+                    
+                </span>
+            </div>
+            
+            <span class="text">TIME LEFT</span>
+        </div>
+            </div>
+            <div id="score-div">
+                <p class="score"></p>
+            </div>
+            
+      </div>
+      </div>
 
     <div class="container">
-        <div class="d-flex justify-content-between">
-            <span class="fs-5">{{quiz.created_at}}</span>
-            <span class="fs-5" id="timer"></span>
+        <div id="information-container">
+            <div id="quiz-title-container">{{quiz.title}}</div>
+            <div id="number-container">
+
+                <span id="number-text">{{quiz.question_set.all|length}}</span>
+                <div id="questions-text">QUESTIONS</div>
+            </div>
+            <div id="timer-container">
+
+                <span class="timer timer-value">—:—</span>
+                <!-- <span class="timer">00:00</span> -->
+                <div id="timer-text">TIMER</div>
+            </div>
+            <div class="score"> 
+            </div>
         </div>
 
-        {% for message in messages %}
-        <div id="message-div">
-            <h4 class="text-center text-success">{{message}}</h4>
-        </div>
-        {% endfor %}
+        
         <!-- javascript score message  -->
         
-        <div id="score-div">
-            <h1 id="score" class="text-center text-success"></h1>
-        </div>
-        <h5 class="text-sucess text-center"></h5>
+       
 
         
-        <form method="post" id="quiz-form">
+        <form method="post" id="quiz-form" autocomplete="off">
             {% csrf_token %}
+            
+
             <div class="questions my-4">
                 {% for question in quiz.question_set.all %}
                 <div class="card mb-2 question">
@@ -46,7 +100,7 @@
                         <div class="form-check">
                             <label class="form-check-label" for="{{option.id}}">
                                 <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">
-                                <span data-letter="{{forloop.counter}}" class="choice-letter"></span><span class="choice-text">{{option.text}}</span>
+                                <span data-letter="{{forloop.counter}}" class="choice-letter"></span><span class="choice-text">{{option.text|safe}}</span>
                             </label>
                             {% if option.is_correct %}
                             <span class="visually-hidden correct-answer">{{option.text}}</span>
@@ -54,9 +108,8 @@
                         </div>
                         {% endfor %}
                         {% for explanation in question.explanation_set.all%}
-                        <span>
     
-                    <div style="color: red" class="explanation hidden">Explanation: {{explanation.text}}</div>
+                    <div class="explanation hidden">Explanation: {{explanation.text|safe}}</div>
                         {% endfor %}
                     </div>
                 </div>
@@ -71,205 +124,8 @@
 
     </div>
 
-    <script>
-       // Elements
-    let submitButton = document.getElementById("submit-button");
-    let timerSpan = document.getElementById("timer");
-    let quizForm = document.getElementById("quiz-form");
-    let questions = document.querySelectorAll(".question");
-    let quizTimer = document.querySelector('#quiz-timer');
-    // let options = document.querySelectorAll(".form-check-input");
-    // let optionsArray = [...options];
-
-    let userScoreInput = $('#user-score');
-    
-    // quizDuration = quizTimer.value * 60;
-    quizDuration = 1300;
-    
-    let allChoiceLetters = document.querySelectorAll('.choice-letter');
-    for(let i = 0; i < allChoiceLetters.length; i++){
-        let choiceValue = allChoiceLetters[i].dataset.letter
-        choiceValue ==  1 ? allChoiceLetters[i].textContent = 'A' : choiceValue == 2 ? allChoiceLetters[i].textContent = 'B' : choiceValue == 3 ? allChoiceLetters[i].textContent = 'C' : allChoiceLetters[i].textContent ='D'
-    }
-
-//     const radioButtons = document.querySelectorAll('input[type="radio"]');
-
-// radioButtons.forEach(radioButton => {
-//   radioButton.addEventListener('change', function() {
-//     const label = this.parentElement; // Target the label element
-
-//     if (this.checked) {
-//       label.style.fontWeight = 'bold';
-//       label.style.color = 'blue';
-//     } else {
-//       // Remove any previously applied styles
-//       label.style.fontWeight = '';
-//       label.style.color = ''; // Inherit default color
-//     }
-//   });
-// });
-
-    
-    
-    
-    
-    // Check right answer and then calculate the score
-    function calculateScore() {
-        let score = 0;
-        let totalQuestions = 0;
-        // Loop through each question
-        questions.forEach(question => {
-            let selectedInput = question.querySelector('input:checked');
-            let correctAnswer = question.querySelector(".correct-answer").innerText;
-            totalQuestions += 1;
-            // Check if the answer is correct or not
-            if (selectedInput && selectedInput.value === correctAnswer) {
-                score += 1;
-            }
-        });
-
-        // Update the hidden input field with score in form
-        userScoreInput.value = score;
-        // console.log(score)
-        displayScore(score,totalQuestions);
-    }
-    
-   function displayScore (score, totalQuestions){
-    let scoreText = document.querySelector('#score');
-    scoreText. textContent = `You got ${score} out of ${totalQuestions}`;
-}
-
-    function highlightAnswersandExplanation() {
-        questions.forEach(question => {
-            
-            // highlight correct answer while showing result
-
-            let correctAnswer = question.querySelector(".correct-answer");
-            let correctAnswerLetter = correctAnswer.previousElementSibling.querySelector(".choice-letter");
-            console.log(correctAnswerLetter)
-            // correctAnswer.previousElementSibling.querySelector("input").classList.add("bg-success");
-            // correctAnswer.previousElementSibling.classList.add("fw-bold");
-            
-            // add x icon and ✅ to the answer
-            correctAnswerLetter.innerHTML = '<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41z"/></svg>'
-            let selectedAnswer = question.querySelector("input[type='radio']:checked");
-            
-            if(selectedAnswer != null){
-
-            
-                let selectedLetter = selectedAnswer.parentNode.querySelector('.choice-letter');
-             if(correctAnswer.textContent != selectedAnswer.value)   {                
-                    
-                    selectedLetter.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="cross-icon" width="1.3em" height="1.3em" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/></svg>' 
-                }
-                
-            }
-            
-           
-          
-            
-            //show explanation to each question while showing result
-            let explanation = question.querySelector(".explanation");
-            explanation.classList.remove('hidden');
-        
-        });
-
-        // disable submit button
-        submitButton.disabled = true;
-        let options = document.querySelectorAll(".form-check-input")
-        // disable all options
-        options.forEach(option => {
-            option.disabled = true;
-        });
-    }
-
-
-    function submitQuiz(){
-        // calculate the user's score
-        calculateScore();
-        // highlight the answers and explanation
-        highlightAnswersandExplanation();
-        clearTimeout(quizTimerId);
-        //send ajax request to send score
-        $.ajax({
-            type: "POST",
-            url: '',
-            data: {
-             score : userScoreInput.value,
-             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-            },
-            success: function(data){
-
-            },
-            error: function(){
-                console.error('Ajax request error, can\'t send score to user')
-            }
-            
-            
-        })
-    }
-    // Attach Event Listener to Submit button
-    
-    $(document).on("submit", "#quiz-form", function(e){
-        e.preventDefault()
-        submitQuiz()
-    })
-
-    // quizForm.addEventListener('submit', function(e){
-    //     e.preventDefault();
-    //     submitQuiz()
-    // });
-    
-    // Update Timer
-    function updateTimer() {
-
-        let minutes = Math.floor(quizDuration / 60);
-        let seconds = quizDuration % 60;
-        timerSpan.innerText = `${minutes}:${seconds}`;
-
-        // Check if the time ended
-        if (quizDuration <= 0) {
-            // Automatically Submit the quiz
-            clearTimeout(quizTimerId);
-            submitQuiz();
-        } else {
-            // decrement the timer value by 1s
-            quizDuration--;
-        }
-    }
-    // Timer Interval
-    quizTimerId = setInterval(updateTimer, 1000);
-    
-
-    // let allChoices = document.querySelectorAll('.form-check-input');
-    // allChoices.forEach(choice => choice.addEventListener('click', submitAnswersImmediately)) 
-    
-    // to see the answers right away after choosing.
-    //    function submitAnswersImmediately() {
+    <script src="{% static 'js/quiz.js'%}">
        
-        //     optionsArray.filter(option =>{
-//     // check if there is a selected option by the user on the quiz
-//         if (option.checked){
-    //             // get the specific question where the student selected option
-//                let question = option.parentElement.parentElement.parentElement.parentElement
-
-//                //reveal the correct answer for the answered question and add styling to it.
-//                let correctAnswer = question.querySelector(".correct-answer");
-//             correctAnswer.previousElementSibling.querySelector("input").classList.add("bg-success");
-//             correctAnswer.previousElementSibling.classList.add("fw-bold");
-
-//             //show explanation for the answered question 
-//             let explanation = question.querySelector(".explanation");
-//             explanation.classList.remove('hidden');
-//             let questionOptions = question.querySelectorAll('.form-check-input');
-//             //disable all choices for the answered question
-//             questionOptions.forEach(option => option.disabled = true)
-
-//         }
-//     })
- 
-// }
-
 </script>
 
 

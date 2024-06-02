@@ -5,7 +5,6 @@ from django.db.models import Sum
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -17,9 +16,51 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class QuizSetting(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    timerSwitch = models.BooleanField(default=True)
+  
+
+    quiz_choice_format = models.CharField(
+        max_length=10,
+        choices=[
+        ('Button', 'Button'),
+        ('Box', 'Box'),
+    ],
+        default='Button',
+    )
+
+    quiz_question_format = models.CharField(
+        max_length=10,
+        choices=[
+        ('Scrollable', 'Scrollable'),
+        ('Paginated', 'Paginated'),
+    ],
+        default='Scrollable',
+    )
+    
+
+    answering_format = models.CharField(
+        max_length=20,
+        choices=[
+        ('Immediately', 'Immediately'),
+        ('After finishing', 'After finishing'),
+    ],
+        default='After finishing',
+    )
+
+    
+    
+    def __str__(self):
+        return f"Quiz Settings for {self.user.username}"
+    
+    class Meta:
+        verbose_name_plural = 'Quiz Settings'
+
 class Quiz(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     quizTimer = models.IntegerField(verbose_name="Timer in minutes")
     quiz_file = models.FileField(upload_to='quiz/')

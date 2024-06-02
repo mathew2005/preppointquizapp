@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Category, Quiz, Question, Choice, Explanation, QuizSubmission, UserRank
+from .models import Category, Quiz, QuizSetting, Question, Choice, Explanation, QuizSubmission, UserRank
 
 # Register your models here.
 admin.site.register(Category)
 admin.site.register(Quiz)
+admin.site.register(QuizSetting)
 admin.site.register(Question)
 admin.site.register(Choice)
 admin.site.register(Explanation)

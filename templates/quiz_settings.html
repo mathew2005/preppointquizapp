@@ -3,15 +3,20 @@
 {% block title %}Settings - BrainBunny{% endblock title %}
 
 {% block content %}
-<span id="switch-text">Timer : ON</span>
-<label class="switch">
+<!-- <span id="switch-text">Timer : ON</span> -->
+<!-- <label class="switch">
     <input type="checkbox" id="timer-switch">
     <span class="slider round"></span>
-</label>
-
+</label> -->
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+  <h1>Quiz Settings</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Settings</button>
+  </form>
 <!-- <input type="checkbox" id="timer-switch"> -->
-  <script type="module" src="{% static 'js/quiz_settings.js'%}">
-    
-    
-</script>
+  
   {% endblock content %}
