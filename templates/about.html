@@ -1,34 +1,155 @@
-{% extends 'index.html' %}
-{% block title %}About Us - BrainBunny{% endblock title %}
+
+{% load static %}
+
 
 {% block content %}
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="../static/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-<h1 class="display-4 text-center my-5">About Us</h1>
+</head>
+<body>
+    {% include 'components/navbar.html '%}
+<main class="mt-0 ">
 
-<main>
-    <div class="container col-md-8 col-sm-12">
-        <section class="app-description">
-            <h2>Welcome to BrainBunny</h2>
-            <p>
-                BrainBunny is an exciting web app that brings you the latest and hottest quiz topics in the world of
-                technology.
-                Sign up now to challenge your knowledge, learn new things, and have fun with our engaging quizzes.
-            </p>
-        </section>
+    <!-- Page Title-->
+    <header class="pt-10">
+        <div class="container">
+            <div class="text-center col-12 col-sm-9 col-lg-7 col-xl-6 mx-auto position-relative z-index-20">
+                <h1 class="display-3 fw-bold mb-3">About us</h1>
+                <p class="text-muted lead mb-0">Launched in 2024, Prep point is an online exam tool with a mission
+                    to make education accessible to everyone in Ethiopia.</p>
+            </div>
+        </div>
+    </header>
+    <!-- / Page Title-->
 
-        <section class="how-it-works">
-            <h2>How It Works</h2>
-            <p>
-                BrainBunny offers a simple and intuitive user interface that allows you to:
-            </p>
-            <ul>
-                <li>Sign up and create your personalized account.</li>
-                <li>Choose from a variety of trending quiz topics in the technology domain.</li>
-                <li>Participate in time-limited quizzes and answer questions to rank yourself on BrainBunny.</li>
-                <li>Track your progress and compete with other tech enthusiasts on the leaderboard.</li>
-            </ul>
-        </section>
+    <!-- Page Content Goes Here -->
+    <div class="container position-relative z-index-20 py-7">
+
+        <!-- About Us Images-->
+        <div class="row g-3">
+            <!-- Images Left Side-->
+            <div class="col-12 col-lg-6 d-none d-lg-block">
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <div class="portrait-images">
+                            <img class="img-fluid rounded shadow-sm"
+                                src="{% static 'assets/images/studentimage1.png' %}"
+                                alt="">
+                        </div class="student-image-1 student-images">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row gy-3">
+                            <div class="col-12">
+                                <picture>
+                                    <img class="img-fluid rounded shadow-sm"
+                                        src="{% static 'assets/images/studentimage2.jpg' %}"
+                                        alt="">
+                                </picture>
+                            </div>
+                            <div class="col-12">
+                                <picture>
+                                    <img class="img-fluid rounded shadow-sm"
+                                        src="{% static 'assets/images/studentimage3.jpg' %}"
+                                        alt="">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Images Left Side-->
+            <!-- Images Right Side-->
+            <div class="col-12 col-lg-6">
+                <div class="row g-3">
+                    <div class="col-12 col-md-6 d-none d-lg-block">
+                        <div class="portrait-images">
+                            <img class="img-fluid rounded shadow-sm"
+                                src="{% static 'assets/images/studentimage4.png' %}"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row gy-3">
+                            <div class="col-12">
+                                <div style="max-height: 145px; overflow: hidden;">
+                                    <img class="img-fluid rounded shadow-sm"
+                                        src="{% static 'assets/images/studentimage5.jpg' %}"
+                                        alt="">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <picture>
+                                    <img class="img-fluid rounded shadow-sm"
+                                        src="{% static 'assets/images/studentimage6.jpg' %}"
+                                        alt="">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Images Right Side-->
+        </div>
+        <!-- About Us Images-->
+
+        <!-- Company Summary-->
+        <div class="col-12 col-md-8 col-lg-6 mx-auto text-center py-4 border-bottom mb-5">
+            <div class="my-5 d-none d-md-flex align-items-start justify-content-between">
+                <div>
+                    <span class="display-3 fw-bold text-primary d-block">30</span>
+                    <span
+                        class="d-block fs-9 fw-bolder tracking-wide text-uppercase text-muted">Exams</span>
+                </div>
+                <div>
+                    <span class="display-3 fw-bold text-primary d-block">75K</span>
+                    <span
+                        class="d-block fs-9 fw-bolder tracking-wide text-uppercase text-muted">Students</span>
+                </div>
+                <div>
+                    <span class="display-3 fw-bold text-primary d-block">160</span>
+                    <span class="d-block fs-9 fw-bolder tracking-wide text-uppercase text-muted">Schools</span>
+                </div>
+            </div>            </div>
+        <!-- Company Summary-->
+
+        <!-- Company Story-->
+        <div class="py-6 row gx-8 align-items-center">
+            <div class="col-12 col-lg-6">
+                <p class="mb-3 small fw-bolder tracking-wider text-uppercase text-primary">How it started</p>
+                <h2 class="display-5 fw-bold mb-6">Our story</h2>
+                <p>Prep Point was founded by students who faced the same challenges you might be experiencing today—struggling to find quality matric practice exams online. Born out of this shared frustration, our journey began in 2023 with a simple yet powerful mission: to help every student not only pass matric but to do so with flying colors. </p>
+
+                <p>Created by students, for students, Prep Point officially launched in 2024. From day one, our goal has been to provide accessible, high-quality practice exams and resources to ensure that you can reach your full potential. We understand the pressures and obstacles that come with preparing for national exams, and we are committed to supporting you every step of the way.</p>
+
+                <p>At Prep Point, we genuinely care about your success. Our dedicated team works tirelessly to ensure that you have the best possible tools and guidance to excel. We believe that with the right support, every student can achieve greatness. So, whether you're aiming for a top score or just looking to pass with confidence, know that we are here for you, rooting for your success. </p>
+
+
+            </div>
+            <div class="col-12 col-lg-6">
+                <picture>
+                    <img class="img-fluid rounded shadow-sm"
+                        src=" {% static 'assets/images/aboutusimage.jpg' %}"
+                        alt="" style="border: calc(1vw) solid #2c4bff">
+                </picture>
+            </div>
+        </div>
+        <!-- /Company Story-->
+
+       
     </div>
+
+    <!-- /Page Content -->
 </main>
+{% include 'components/footer.html '%}
+
+<script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+</body>
 
 {% endblock content %}

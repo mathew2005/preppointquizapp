@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+
 {% load static %}
 {% block title %}Settings - BrainBunny{% endblock title %}
 
@@ -8,15 +8,41 @@
     <input type="checkbox" id="timer-switch">
     <span class="slider round"></span>
 </label> -->
-{% for message in messages %}
-<h5>{{message}}</h5>
-{% endfor %}
-  <h1>Quiz Settings</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Settings</button>
-  </form>
+<div class="container pb-5 pt-5">
+  
+  <div class="row row-cols-sm-1 row-cols-lg-3 container">
+    <div class="col-12"></div>
+    <div class="col-12">
+      <h1>Quiz Settings</h1>
+      {% for message in messages %}
+      <h5>{{message}}</h5>
+      {% endfor %}
+      <form method="post" class="form">
+        {% csrf_token %}
+        <div class="mb-3 d-flex justify-content-between">
+            <label for="{{ form.timerSwitch.id_for_label }}" class="form-label">Timer Switch</label>
+            {{ form.timerSwitch }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.quiz_choice_format.id_for_label }}" class="form-label">Quiz Choice Format</label>
+            {{ form.quiz_choice_format }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.quiz_question_format.id_for_label }}" class="form-label">Quiz Question Format</label>
+            {{ form.quiz_question_format }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.answering_format.id_for_label }}" class="form-label">Answering Format</label>
+            {{ form.answering_format }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+    </form>
+    </div>
+    <div class="col-12"></div>
+  </div>
+ 
+</div>
+
 <!-- <input type="checkbox" id="timer-switch"> -->
   
   {% endblock content %}

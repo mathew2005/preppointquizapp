@@ -1,16 +1,26 @@
-{% extends 'index.html' %}
-{% load static %}
-{% block title %}All Quizzes - BrainBunny{% endblock title %}
 
-{% block content %}
+{% load static %}
+
 <head>
-    <link rel="stylesheet" href="{% static 'css/all_quiz.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/all_quiz.css' %}">
+	<title>All Quizzes - Prep point</title>
+
+    <!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
 </head>
 <body>
+	{% include 'components/navbar.html'%}
 	<h1 class="display-4 text-center my-5">All Quizzes</h1>
 
-
+	
 	<div class="container">
 		<div class="d-flex flex-wrap">
 			<a href="{% url 'all_quiz' %}" class="btn btn-sm btn-light m-1">All Quiz</a>
@@ -20,12 +30,17 @@
 		</div>
 	</div>
 
-	<form class="container d-flex my-4" role="search" method="get" action="{% url 'search' ' ' %}" >
+	<form id="all-quiz-form" class="container d-flex my-4" role="search" method="get" action="{% url 'search' ' ' %}" >
 		<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-		<a href="#" type="submit" class="btn btn-primary ms-2">Search</a>
+		<a href="#" type="submit">
+			<button style="background: #2c4bff; border: none; height: 3rem; width: 3rem; transform: translateX(-3.5rem); position: absolute;">
+
+				<svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24"><path fill="white" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>
+			</button>
+		</a>
 	</form>
 
-	<div class="container">
+	<div class="container pb-10">
 
 		<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
 			{% if quizzes|length > 0 %}
@@ -79,10 +94,11 @@
 			{% endif %}
 		</div>
 	</div>
-	<script src="{% static 'js/all_quiz.js' %}">
 
-	</script>
+	{% include 'components/footer.html' %}
+	
+	<script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+	<script src="{% static 'assets/js/all_quiz.js' %}"></script>
 </body>
 
-
-{% endblock content %}

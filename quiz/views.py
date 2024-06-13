@@ -86,7 +86,13 @@ def quiz_view(request, quiz_id):
 
 @login_required(login_url='account_login')
 def quiz_settings(request):
+
+    # user_object = User.objects.get(username=request.user)
+    
+
     user_object = request.user
+    user_profile = Profile.objects.get(user=user_object)
+    
     quiz_settings, created = QuizSetting.objects.get_or_create(user=user_object)
 
 
@@ -99,7 +105,7 @@ def quiz_settings(request):
     else:
         form = QuizSettingForm(instance=quiz_settings)
 
-    context = {'quiz_settings': quiz_settings, 'form': form}
+    context = {'quiz_settings': quiz_settings, 'form': form, "user_profile": user_profile}
     return render(request, 'quiz_settings.html', context)
 
 

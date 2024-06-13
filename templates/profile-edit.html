@@ -1,69 +1,71 @@
-{% extends 'index.html' %}
+{% load static %}
+<html>
 
-{% block title %}@{{request.user.username}} Profile Edit - BrainBunny{% endblock title %}
+  <head>
 
-{% block content %}
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
 
-  <h1 class="display-4 text-center my-5">Edit Profile</h1>
-
-
-  <div class="container">
+    <!-- Favicon  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <title>@{{request.user.username}} Profile Edit - Prep point</title>    
+  </head>
+  <body>
+    {% include 'components/navbar.html' %}
+    <h1 class="display-4 text-center my-5">Edit Profile</h1>
+    
+    
+  <div class="container pb-10">
     <div class="row row-cols-sm-1 row-cols-lg-3 container">
       <div class="col-12">
       </div>
       <div class="col-12">
 
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" id="profile-form">
             {% csrf_token %}
             <div class="mb-3 d-flex justify-content-center">
                 <img src="{{user_profile.profile_img.url}}" alt="profile-pic" width="150" height="150" class="rounded-circle">
             </div>
 
             <div class="mb-3">
-                {% for message in messages %}
+              {% for message in messages %}
                 <h5 class="text-danger">{{message}}</h5>
                 {% endfor %}
               </div>
           <div class="mb-3">
-            <label for="exampleInputImage" class="form-label visually-hidden">Profile Image</label>
-            <input type="file" name="profile_img" class="form-control" id="exampleInputImage">
+            <label for="exampleInputImage" class="form-label ">Profile Image</label>
+            <br>
+            <span style="font-size: 0.9rem; font-weight: 500;" class="text-muted">Max size of 5MB</span>
+
+            <input type="file" name="profile_img" class="form-control" id="exampleInputImage" accept=".png, .jpg, .jpeg">
           </div>
           <div class="mb-3">
-            <label for="exampleInputFirstName" class="form-label visually-hidden">First Name</label>
+            <label for="exampleInputFirstName" class="form-label">First Name</label>
             <input type="text" name="firstname" value="{{user_profile.user.first_name}}" class="form-control" id="exampleInputFirstName" placeholder="First Name" required>
           </div>
           <div class="mb-3">
-            <label for="exampleInputLastName" class="form-label visually-hidden">Last Name</label>
+            <label for="exampleInputLastName" class="form-label">Last Name</label>
             <input type="text" name="lastname" value="{{user_profile.user.last_name}}" class="form-control" id="exampleInputLastName" placeholder="Last Name" required>
           </div>
           <!-- <div class="mb-3">
-            <label for="exampleInputEmail2" class="form-label visually-hidden">Email</label>
+            <label for="exampleInputEmail2" class="form-label">Email</label>
             <input type="email" name="email" value="{{user_profile.user.email}}" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-              placeholder="Email" required>
+            placeholder="Email" required>
           </div> -->
           <div class="mb-3">
-            <label for="exampleInputUsername1" class="form-label visually-hidden">Username</label>
+            <label for="exampleInputUsername1" class="form-label">Username</label>
             <input type="text" name="username" value="{{user_profile.user.username}}" class="form-control" id="exampleInputUsername1" aria-describedby="emailHelp"
               placeholder="Username" required>
           </div>
-          <!-- <div class="mb-3">
-            <label for="exampleInputLocation" class="form-label visually-hidden">Location</label>
-            <input type="text" name="location" value="{{user_profile.location}}" class="form-control" id="exampleInputLocation" placeholder="Location" required>
-          </div> -->
-<!--           
-          <div class="mb-3">
-            <label for="exampleInputGender" class="form-label visually-hidden">Gender</label>
-            <select class="form-select form-control" name="gender" id="exampleInputGender" aria-label="Default select example" required>
-                <option selected>Choose Your Gender</option>
-                <option {% if user_profile.gender == 'Male' %}selected{% endif %} value="Male">Male</option>
-                <option {% if user_profile.gender == 'Female' %}selected{% endif %} value="Female">Female</option>
-                <option {% if user_profile.gender == 'Other' %}selected{% endif %} value="Other">Other</option>
-              </select>
-          </div> -->
 
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label visually-hidden">Your Bio</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Your Bio</label>
             <textarea class="form-control" name="bio" id="exampleFormControlTextarea1" rows="3" placeholder="Your Bio" required>{{user_profile.bio}}</textarea>
           </div>
           
@@ -74,5 +76,21 @@
       </div>
     </div>
   </div>
+  {% include 'components/footer.html' %}
 
-{% endblock content %}
+  
+  <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+  <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+  <script>
+    document.getElementById('profile-form').addEventListener('submit', function(event) {
+      const fileInput = document.getElementById('exampleInputImage');
+      const file = fileInput.files[0];
+      if (file && file.size > 5 * 1024 * 1024) { // 5MB in bytes
+        alert('File size must be less than 5MB.');
+        event.preventDefault();
+      }
+    });
+  </script>
+
+</body>  
+</html>

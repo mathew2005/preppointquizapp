@@ -1,12 +1,20 @@
-{% extends 'index.html' %}
 {% load static %}
-{% block title %}{{quiz.title}} - BrainBunny{% endblock title %}
 
 {% block content %}
+<!doctype html>
+<html>
+
 <head>
-    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% block title %}{{quiz.title}} - Preppoint{% endblock title %}
+
+<link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'assets/css/quiz.css' %}">
 </head>
 <body>
+    {% include 'components/navbar.html' %}
+
     <input type="hidden" id="timerSwitch_value" value="{{ quiz_settings.timerSwitch }}">
     <input type="hidden" id="quizChoiceFormat_value" value="{{ quiz_settings.quiz_choice_format }}">
     <input type="hidden" id="quizQuestionFormat_value" value="{{ quiz_settings.quiz_question_format }}">
@@ -60,7 +68,7 @@
       </div>
       </div>
 
-    <div class="container">
+    <div class="container pb-10">
         <div id="information-container">
             <div id="quiz-title-container">{{quiz.title}}</div>
             <div id="number-container">
@@ -123,11 +131,17 @@
         </form>
 
     </div>
+    
+    {% include 'components/footer.html' %}
 
-    <script src="{% static 'js/quiz.js'%}">
-       
-</script>
+    <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/quiz.js'%}"></script>
+    <!-- Theme JS -->
+    <!-- Vendor JS -->
+    
 
 
 </body>
+</html>
 {% endblock content %}

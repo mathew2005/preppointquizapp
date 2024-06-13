@@ -133,26 +133,63 @@ def blog_view(request, blog_id):
     context = {"user_profile": user_profile, "blog": blog}
     return render(request, "blog.html", context)
 
-@login_required(login_url='account_login')
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.conf import settings
+
 def contact_view(request):
 
-    user_object = User.objects.get(username=request.user)
-    user_profile = Profile.objects.get(user=user_object)
 
-    if request.method == "POST":
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        telephone = request.POST.get('telephone', '')
         subject = request.POST.get('subject')
-        message = request.POST.get('message')
+        message = request.POST.get('about')
 
-        if subject is not None and message is not None:
-            form = Message.objects.create(user=request.user, subject=subject, message=message)
-            form.save()
-            messages.success(request, "We got your message. We will resolve your query soon.")
-            return redirect('profile', request.user.username)
-        
-        else:
-            return redirect('contact')
-    
-    context = {"user_profile": user_profile}
+        if name and email and subject and message:
+            # Construct the email content
+            email_subject = f"New Contact Form Submission: {subject}"
+            email_body = render_to_string('contact_email_template.html', {
+                'name': name,
+                'email': email,
+                'telephone': telephone,
+                'subject': subject,
+                'message': message,
+            })
+
+            # Send the email
+            try:
+                send_mail(
+                    email_subject,
+                    '',
+                    settings.EMAIL_HOST_USER,
+                    [settings.EMAIL_HOST_USER, email],
+                    fail_silently=False,
+                    html_message=email_body
+                )
+                send_mail(
+                   'Email Recieved',
+                    'This is a confirmation email that we recieved your message and our team will be in touch with you as soon as possible.',
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False,
+                )
+                messages.success(request, 'Your message has been sent successfully.')
+            except Exception as e:
+                  messages.error(request, 'There was an error sending your message. Please try again later.')
+
+        return redirect('contact')
+
+    if request.user.is_authenticated:
+        # request user
+        user_object = User.objects.get(username=request.user)
+        user_profile = Profile.objects.get(user=user_object)
+        context = {"user_profile": user_profile}
+    else:
+        context = {}
     return render(request, "contact.html", context)
 
 @user_passes_test(is_superuser)
@@ -211,3 +248,17 @@ def search_users_view(request):
     else:
         context = {"query": query, "users": users}
     return render(request, "search-users.html", context)
+
+def home_view(request):
+    if request.user.is_authenticated:
+        # request user
+        user_object = User.objects.get(username=request.user)
+        user_profile = Profile.objects.get(user=user_object)
+        context = {"user_profile": user_profile}
+    else:
+        context = {}
+
+    return render(request, 'home.html', context)
+
+# def navbar_view(request):
+#     return render(request, 'components/navbar.html', {})
