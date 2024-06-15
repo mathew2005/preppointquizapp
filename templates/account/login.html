@@ -1,5 +1,7 @@
-
 {% load static %}
+{% load i18n %}
+
+
 
 {% block content%}
 <!doctype html>
@@ -15,19 +17,13 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
-    <link rel="mask-icon" href="{% static 'assets/images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    
     
     
     
     <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/login_signup.css' %}">
 
     
     
@@ -51,28 +47,25 @@
 <body>
     {% include 'components/navbar.html' %}
      <!-- Display messages if there are any -->
-     {% if messages %}
-     <div>
-         
-         <ul>
-             {% for message in messages %}
-                 <li>{{ message }}</li>
-             {% endfor %}
-         </ul>
-     </div>
- {% endif %}
+
+     {% include 'messages.html' %}
+
+     
+
+
     <!-- Main Section-->
-    <main id="login-page">
-        <div id="login-text-container" data-aos="fade-in">
+    <main id="login-signup-page">
+       
+        <div id="login-signup-text-container" data-aos="fade-in">
             <h1 class="display-3 fw-bold mb-4">Take <span style="background: #5debdf;">unlimited</span> practice exams for <span style="background: #5debdf;">free.</span></h1>
             <h2 class="fs-5 text-muted fw-light lh-base">Ace the 12th Grade Ethiopian Matric Exam! Free practice tests with Simple Unit & Progress Tracking.</h2>
         </div>
-        <div id="login-form-container" data-aos="fade-in">
-        <div id="login-form-text">
+        <div id="login-signup-form-container" data-aos="fade-in">
+        <div id="login-signup-form-text">
             <h2>Login</h2>
             <p>Enter to get unlimited access to 30+ practice exams.</p>
         </div>
-            <form method="post" action="{% url 'account_login' %}" id="login-form">
+            <form method="post" action="{% url 'account_login' %}" id="login-signup-form">
                 {% csrf_token %}
                 <label for="id_login" class="label-input">
                     Email or Username <span class="required-symbol">*</span>
@@ -86,6 +79,7 @@
                 <div id="password-container">
 
                     <input type="password" id="id_password" name="password" required>
+
                     <span id="password-eye"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg></span>
                 </div>
                     
@@ -97,7 +91,7 @@
                 </label>
                 <a href="{% url 'account_reset_password' %}">Forgot your Password?</a>
             </div>
-                <input type="submit" value="Log In" id="login-form-btn">
+                <input type="submit" value="Log In" id="login-signup-form-btn">
                 <p id="or-text">OR</p>
                 <div id="social-login">
                     
@@ -150,7 +144,7 @@
     <script>
         let passwordEye = document.getElementById('password-eye');
         let passwordInput = document.getElementById('id_password');
-        let loginForm = document.getElementById('login-form');
+        let loginForm = document.getElementById('login-signup-form');
 
         passwordEye.addEventListener('click', () =>{
             if(passwordInput.type == 'password'){

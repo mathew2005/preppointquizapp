@@ -15,4 +15,5 @@ urlpatterns = [
     path('downloads', views.downloads_view, name='downloads'),
     path('search/users', views.search_users_view, name='search_users'),
     # path('navbar', views.navbar_view, name='navbar_view')
+
 ]

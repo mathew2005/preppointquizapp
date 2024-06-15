@@ -22,6 +22,7 @@
 	<body>
 		{% include 'components/navbar.html' %}
 		
+		{% include 'messages.html' %}
 		<!-- Contact Details & Form-->
 		<div class="container">
 
@@ -30,9 +31,7 @@
 			<div class="col-12 col-lg-8">
 				<p class="mb-3 small fw-bolder tracking-wider text-uppercase text-primary">Get in touch</p>
 				<h2 class="display-5 fw-bold mb-6">Send us a message</h2>
-				{% for message in messages %}
-				<div>{{message}}</div>
-				{% endfor %}
+				
 				<form method="POST" id="contact-form">
 					{% csrf_token %}
 					<div class="row g-5">

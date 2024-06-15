@@ -1,0 +1,123 @@
+<head>
+<style>
+    
+#messages-container{
+    position: fixed;
+    z-index: 200;
+    top: 2rem;
+    right: 2rem;
+    color: white;
+   
+}
+.message-container{
+    background: #6f46ff;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    font-family: 'Metropolis' ;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.message-container-success{
+    background: #6f46ff;
+    
+
+}
+.message-container-error{
+    background: red;
+
+}
+.message-status{
+    margin-right: 0.3rem;
+}
+.message-text{
+    margin-right:1.5rem;
+}
+
+.closebtn {
+ transform: translateY(-20%);
+cursor: pointer;
+position: absolute;
+right: 0.5rem;
+}
+
+.closebtn:hover {
+    color: white;
+}
+
+
+
+</style>
+</head>
+<body>
+
+    {% if form.errors %}
+    <div id="messages-container">
+    {% for field in form %}
+        {% for error in field.errors %}
+
+        <div class="message-container message-container-error">
+           <span class="message-status"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.1 4.9C15.2 1 8.8 1 4.9 4.9S1 15.2 4.9 19.1s10.2 3.9 14.1 0s4-10.3.1-14.2m-4.3 11.3L12 13.4l-2.8 2.8l-1.4-1.4l2.8-2.8l-2.8-2.8l1.4-1.4l2.8 2.8l2.8-2.8l1.4 1.4l-2.8 2.8l2.8 2.8z"/></svg></span>
+           <span class="message-text">
+               {{error|escape}}
+
+           </span>
+            <span class="closebtn" onclick="this.parentElement.style.display='none';"><svg xmlns="http://www.w3.org/2000/svg" width="0.85em" height="0.85em" viewBox="0 0 15 15"><path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27"/></svg></span>
+           </div>
+
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+
+       <div class="message-container message-container-error">
+          <span class="message-status"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.1 4.9C15.2 1 8.8 1 4.9 4.9S1 15.2 4.9 19.1s10.2 3.9 14.1 0s4-10.3.1-14.2m-4.3 11.3L12 13.4l-2.8 2.8l-1.4-1.4l2.8-2.8l-2.8-2.8l1.4-1.4l2.8 2.8l2.8-2.8l1.4 1.4l-2.8 2.8l2.8 2.8z"/></svg></span>
+          <span class="message-text">
+              {{error|escape}}
+
+          </span>
+           <span class="closebtn" onclick="this.parentElement.style.display='none';"><svg xmlns="http://www.w3.org/2000/svg" width="0.85em" height="0.85em" viewBox="0 0 15 15"><path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27"/></svg></span>
+          </div>
+          {% endfor %}
+       </div>
+{% endif %}
+
+       {% if messages %}
+    <div id="messages-container">
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+
+<div class="message-container message-container-success">
+   <span class="message-status"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clip-rule="evenodd"/></svg></span>
+   <span class="message-text">
+       {{message}}
+
+   </span>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';"><svg xmlns="http://www.w3.org/2000/svg" width="0.85em" height="0.85em" viewBox="0 0 15 15"><path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27"/></svg></span>
+   </div>
+{% elif message.tags == 'error' %}
+
+  <div class="message-container message-container-error">
+     <span class="message-status"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.1 4.9C15.2 1 8.8 1 4.9 4.9S1 15.2 4.9 19.1s10.2 3.9 14.1 0s4-10.3.1-14.2m-4.3 11.3L12 13.4l-2.8 2.8l-1.4-1.4l2.8-2.8l-2.8-2.8l1.4-1.4l2.8 2.8l2.8-2.8l1.4 1.4l-2.8 2.8l2.8 2.8z"/></svg></span>
+     <span class="message-text">
+         {{message}}
+         
+     </span>
+      <span class="closebtn" onclick="this.parentElement.style.display='none';"><svg xmlns="http://www.w3.org/2000/svg" width="0.85em" height="0.85em" viewBox="0 0 15 15"><path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27"/></svg></span>
+     </div>
+
+     {% else %}
+     
+<div class="message-container">
+   <span class="message-text">
+       {{message}}
+
+   </span>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';"><svg xmlns="http://www.w3.org/2000/svg" width="0.85em" height="0.85em" viewBox="0 0 15 15"><path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27"/></svg></span>
+   </div>
+   {% endif %}
+   {% endfor %}
+</div>
+{% endif %}
+</body>

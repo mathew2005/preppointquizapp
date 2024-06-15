@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+  {% include 'messages.html' %}
+    <!-- Menu section -->
+    <div>
+        <strong>Menu:</strong>
+        <ul>
+            <li>
+                <a href="{% url 'account_login' %}">Sign In</a>
+            </li>
+            <li>
+                <a href="{% url 'account_signup' %}">Sign Up</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sign Up section -->
+    <h1>Sign Up</h1>
+
+    <p>
+        Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a>.
+    </p>
+
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+        <p>
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" placeholder="Your email address" autocomplete="email" required="" id="id_email">
+        </p>
+
+        <p>
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" placeholder="Choose a username" id="id_username">
+        </p>
+
+        <p>
+            <label for="id_password1">Password:</label>
+            <input type="password" name="password1" placeholder="Choose a password" autocomplete="new-password" required="" id="id_password1">
+            <ul>
+                <li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li>
+            </ul>
+        </p>
+
+        <p>
+            <label for="id_password2">Confirm Password:</label>
+            <input type="password" name="password2" placeholder="Confirm your password" autocomplete="new-password" required="" id="id_password2">
+        </p>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <hr>
+
+    <!-- Third-party signup section -->
+    <h2>Or use a third-party</h2>
+
+    <ul>
+        {% load socialaccount %}
+        <li>
+            <a title="Facebook" href="{% provider_login_url 'facebook' process='login' %}">Facebook</a>
+        </li>
+        <li>
+            <a title="Google" href="{% provider_login_url 'google' process='login' %}">Google</a>
+        </li>
+        <li>
+            <a title="Telegram" href="{% provider_login_url 'telegram' process='login' %}">Telegram</a>
+        </li>
+    </ul>
+
+</body>
+</html>

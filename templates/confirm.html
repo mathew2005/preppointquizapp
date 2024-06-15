@@ -1,19 +1,122 @@
-{% extends 'index.html' %}
+{% load static %}
 
-{% block title %}@{{request.user.username}} Profile Delete Confirmation - BrainBunny{% endblock title %}
+<!DOCTYPE html>
+<html>
+  <title>@{{request.user.username}} Profile Delete Confirmation - Prep point</title>
+  <head>
+    
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
 
-{% block content %}
+    <!-- Favicon  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+ 
+    <style>
+       #confirm-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#confirm-page h1{
+    color: #2c4bff;
+    font-size: calc(2.5rem + 0.5vw);
+
+}
+#content-container #username{
+  background: #2c4bff;
+  color: white;
+}
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container h2{
+  font-size: 1rem;
+}
+#content-container p {
+color: red;
+font-weight: 600;
+font-size: 0.9rem;
+}
+#content-container input[type='submit']{
+  margin-left: 1rem;
+}
+#warning-icon-container{
+  background: #FFE4E6;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+    </style>
+  </head>
+
+  <body>
+    {% include 'components/navbar.html' %}
+
+    
+    
 
 
-<h1 class="display-4 text-center my-5">Confirmation Page</h1>
 
-  <div class="container">
-    <form action="" method="POST" class="">
-        {% csrf_token %}
-        <p class="fs-4"><b>@{{request.user.username}}</b>, Are you sure you want to delete your profile??</p>
-        <a href="{% url 'profile' request.user.username %}" class="btn btn-success" type="button">Back to Profile</a>
-        <input class="btn btn-danger" type="submit" value="Confirm">
+  <main id="confirm-page">
+    <form id="content-container" method="POST">
+      {% csrf_token %}
+      <div>
+
+      <span id="warning-icon-container">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="red" d="M12 5.511c.561 0 1.119.354 1.544 1.062l5.912 9.854C20.307 17.842 19.65 19 18 19H6c-1.65 0-2.307-1.159-1.456-2.573l5.912-9.854c.425-.708.983-1.062 1.544-1.062m0-2c-1.296 0-2.482.74-3.259 2.031l-5.912 9.856c-.786 1.309-.872 2.705-.235 3.83S4.473 21 6 21h12c1.527 0 2.77-.646 3.406-1.771s.551-2.521-.235-3.83l-5.912-9.854C14.482 4.251 13.296 3.511 12 3.511"/><circle cx="12" cy="16" r="1.3" fill="red"/><path fill="red" d="M13.5 10c0-.83-.671-1.5-1.5-1.5a1.499 1.499 0 0 0-1.389 2.062C11.165 11.938 12 14 12 14l1.391-3.438c.068-.173.109-.363.109-.562"/></svg>
+      </span>
+    </div>
+
+        <div>
+
+            <h1>Confirm Deletion Process</h1>
+        </div>
+        <div>
+
+            <h2><span id="username">@{{request.user.username}}</span>, Are you sure you want to delete your profile?</h2>
+        </div>
+        <div>
+
+            <p>This action cannot be undone.</p>
+        </div>
+        <div>
+            
+          <a href="{% url 'profile' request.user.username %}" class="btn btn-primary" type="button">Cancel</a>
+          <input class="btn btn-danger" type="submit" value="Delete">
+        </div>
     </form>
-  </div>
+</main>
+  {% include 'components/footer.html' %}
 
-{% endblock content %}
+  <!-- vendor and theme js  -->
+
+  <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+  <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+</body>
+    </html>

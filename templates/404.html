@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- theme css  -->
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found</title>
+
+    <style>
+        #error-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#error-page h1{
+    color: #2c4bff;
+    font-size: 7rem;
+
+}
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container p {
+color: #586268;
+font-weight: 600;
+}
+
+    </style>
+
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+<main id="error-page">
+    <div id="content-container">
+        <div>
+
+            <h1>404</h1>
+        </div>
+        <div>
+
+            <h2>Looks like this page doesn't exist!</h2>
+        </div>
+        <div>
+
+            <p>Go back to home and continue exploring</p>
+        </div>
+        <div>
+            
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</main>
+    {% include 'components/footer.html' %}
+
+
+    <!-- Theme JS -->
+    <!-- Vendor JS -->
+    <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+</body>
+</html>

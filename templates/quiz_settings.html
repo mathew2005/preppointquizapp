@@ -1,6 +1,5 @@
 
 {% load static %}
-{% block title %}Settings - BrainBunny{% endblock title %}
 
 {% block content %}
 <!-- <span id="switch-text">Timer : ON</span> -->
@@ -8,15 +7,27 @@
     <input type="checkbox" id="timer-switch">
     <span class="slider round"></span>
 </label> -->
-<div class="container pb-5 pt-5">
-  
-  <div class="row row-cols-sm-1 row-cols-lg-3 container">
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+
+  </head>
+
+  <body>
+    {% include 'components/navbar.html' %}
+    
+    {% include 'messages.html' %}
+    
+    <div class="container pb-5 pt-5">
+      
+      <div class="row row-cols-sm-1 row-cols-lg-3 container">
     <div class="col-12"></div>
     <div class="col-12">
       <h1>Quiz Settings</h1>
-      {% for message in messages %}
-      <h5>{{message}}</h5>
-      {% endfor %}
+      
       <form method="post" class="form">
         {% csrf_token %}
         <div class="mb-3 d-flex justify-content-between">
@@ -24,7 +35,7 @@
             {{ form.timerSwitch }}
         </div>
         <div class="mb-3">
-            <label for="{{ form.quiz_choice_format.id_for_label }}" class="form-label">Quiz Choice Format</label>
+          <label for="{{ form.quiz_choice_format.id_for_label }}" class="form-label">Quiz Choice Format</label>
             {{ form.quiz_choice_format }}
         </div>
         <div class="mb-3">
@@ -44,5 +55,14 @@
 </div>
 
 <!-- <input type="checkbox" id="timer-switch"> -->
+{% include 'components/footer.html' %}
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
   
+<script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+</body>
+</html>
+
   {% endblock content %}

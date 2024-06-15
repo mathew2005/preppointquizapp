@@ -1,0 +1,39 @@
+@font-face {
+    font-family:'Metropolis' ;
+    src: url('../assets/Metropolisfont/Metropolis-Regular.otf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family:'Metropolis' ;
+    src: url('../assets/Metropolisfont/Metropolis-Medium.otf') format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family:'Metropolis' ;
+    src: url('../assets/Metropolisfont/Metropolis-Black.otf') format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family:'Metropolis' ;
+    src: url('../assets/Metropolisfont/Metropolis-Bold.otf') format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: "Metropolis"; */
+    font-family: 'Metropolis',sans-serif;
+    
+}
+  :root{
+  --background-light-100: #fff;
+  --main-color-100: #407BFF;
+  --background-dark-100: #000;
+  }
+  

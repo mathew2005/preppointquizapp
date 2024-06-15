@@ -1,12 +1,11 @@
 {% load static %}
 
-{% block content %}
+
 <!doctype html>
 <html>
 
 <head>
-{% block title %}{{quiz.title}} - Preppoint{% endblock title %}
-
+<title>{{quiz.title}} - Preppoint</title>
 <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -144,4 +143,3 @@
 
 </body>
 </html>
-{% endblock content %}

@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#4v#e4ur8=n!2yz@%t)=_05b@_)^w&)uh+fcc=m_9du4&9+pm_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+handler404 = 'base.views.custom_404'
 
 # mail = os.environ.get('MAIL')
 # mail_pass = os.environ.get('PASSWORD')
@@ -39,7 +41,7 @@ EMAIL_HOST_PASSWORD = "dtdbhapyjwpelknq"
 DEFAULT_FROM_EMAIL = "test.mailed.login@gmail.com"
 # DEFAULT_FROM_EMAIL = mail
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.231", "192.168.164.7", '192.168.223.7', '192.168.0.19']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.231", "192.168.164.7", '192.168.223.7', '192.168.0.19', '192.168.0.18']
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
@@ -77,12 +79,14 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
+
+
 ROOT_URLCONF = 'preppointquizapp.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,'templates'],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,12 +151,16 @@ USE_I18N = True
 
 USE_TZ = True
 # ACCOUNT_SIGNUP_REDIRECT_URL = '/account/login'
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_USERNAME_REQUIRED = False
+
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_CHANGE_EMAIL = False
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_REAUTHENTICATION_REQUIRED = True

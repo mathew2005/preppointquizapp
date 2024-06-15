@@ -9,7 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- undo everything  -->
     <!-- Main CSS -->
-    
+     <!-- Favicon -->
+     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon/apple-touch-icon.png' %}">
+     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon/favicon-32x32.png' %}">
+     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon/favicon-16x16.png' %}">
 
         
 
@@ -38,7 +41,7 @@
             <a id="logo-link" class="navbar-brand d-flex align-items-center lh-1 me-10 transition-opacity opacity-75-hover" href="{% url 'home' %}">
                 <!-- Logo SVG Icon-->
                 <span class="f-w-7 d-block text-success me-2">
-                    <svg class="w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.46 258.91"><path d="M145.61,187.72,22.41,116.58,0,129.52l50.45,29.13L0,187.77l22.41,12.94s90.75,52.38,100.82,58.2l123.23-71.13L44.7,71.2l78.54-45.34,78.4,45.26-28,16.2-50.31-29L100.85,71.2l123.21,71.13,22.4-12.94L196,100.25q25.25-14.55,50.46-29.12L123.23,0,0,71.13,201.77,187.71l-78.52,45.41L44.8,187.78l28.06-16.19,50.34,29.07Z" fill="currentColor" fill-rule="evenodd"/></svg>
+                    <img src="{% static 'assets/images/logo.svg' %}" alt="">
                 </span>
                 <!--/ Logo SVG Icon -->
                 <span class="fw-bold text-body">Prep point</span>

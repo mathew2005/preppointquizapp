@@ -262,3 +262,17 @@ def home_view(request):
 
 # def navbar_view(request):
 #     return render(request, 'components/navbar.html', {})
+
+
+from django.http import Http404
+from django.shortcuts import render
+
+def custom_404_view(request):
+    if request.user.is_authenticated:
+        # request user
+        user_object = User.objects.get(username=request.user)
+        user_profile = Profile.objects.get(user=user_object)
+        context = {"user_profile": user_profile}
+    else:
+        context = {}
+    return render(request,'404.html', context, status=404)

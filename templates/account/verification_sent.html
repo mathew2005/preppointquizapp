@@ -1,0 +1,103 @@
+{% load static %}
+{% load i18n %}
+{% load allauth %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify your Email Address - Prep point</title>
+
+    <!-- favicon icons  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="../static/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- theme and vendor css  -->
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+
+    <style>
+        #error-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 2rem;
+}
+#error-page h1{
+    color: #2c4bff;
+    font-size: 7rem;
+
+}
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container p {
+color: #586268;
+font-weight: 600;
+max-width: 40rem;
+}
+
+    </style>
+</head>
+<body>
+    
+    {% include 'components/navbar.html' %}
+    {% include 'messages.html' %}
+
+
+    <main id="error-page">
+        <div id="content-container">
+            <div>
+    
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24"><path fill="#66fa66" d="M9.592 3.2a5.727 5.727 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935" opacity="0.5"/><path fill="#024f02" d="M16.374 9.863a.814.814 0 0 0-1.151-1.151l-4.85 4.85l-1.595-1.595a.814.814 0 0 0-1.151 1.151l2.17 2.17a.814.814 0 0 0 1.15 0z"/></svg>
+            </div>
+            <div>
+    
+                <h2>Verification Email sent!</h2>
+            </div>
+            <div>
+    
+                <p>Your verification email has been sent! Please check your inbox and, if you don't see it, look in your spam or junk folder. If you still can't find it, <a href="{% url 'contact' %}">contact our support team for help.</a></p>
+            </div>
+            <div>
+                
+                <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </main>
+        {% include 'components/footer.html' %}
+    
+    
+        <!-- Theme JS -->
+        <!-- Vendor JS -->
+        <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+        <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+    
+</body>
+</html>
+
+{% endblock %}
+

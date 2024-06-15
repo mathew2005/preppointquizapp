@@ -1,14 +1,4 @@
-<!-- <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
-        <li class="nav-item"><a href="{% url 'blogs' %}" class="nav-link px-2 text-body-secondary">Blogs</a></li>
-        <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link px-2 text-body-secondary">Contact</a></li>
-        <li class="nav-item"><a href="{% url 'terms_conditions' %}" class="nav-link px-2 text-body-secondary">Terms & Conditions</a></li>
-        <li class="nav-item"><a href="{% url 'downloads' %}" class="nav-link px-2 text-body-secondary">Downloads</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2023, BrainBunny</p>
-</footer> -->
+{% load static %}
 
 <footer class="bg-dark pt-5 pb-8  ">
     
@@ -28,10 +18,10 @@
 
             <!-- Footer Logo-->
             <a class="d-flex align-items-center lh-1 text-white transition-opacity opacity-50-hover text-decoration-none mb-4 mb-md-0"
-                href="#">
+                href="{% url 'home' %}">
                 <!-- Logo SVG Icon-->
                 <span class="f-w-7 d-block text-success me-2">
-                    <svg class="w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.46 258.91"><path d="M145.61,187.72,22.41,116.58,0,129.52l50.45,29.13L0,187.77l22.41,12.94s90.75,52.38,100.82,58.2l123.23-71.13L44.7,71.2l78.54-45.34,78.4,45.26-28,16.2-50.31-29L100.85,71.2l123.21,71.13,22.4-12.94L196,100.25q25.25-14.55,50.46-29.12L123.23,0,0,71.13,201.77,187.71l-78.52,45.41L44.8,187.78l28.06-16.19,50.34,29.07Z" fill="currentColor" fill-rule="evenodd"/></svg>
+                    <img src="{% static 'assets/images/logo.svg' %}">
                 </span>
                 <!--/ Logo SVG Icon -->
                 <span class="fw-bold">Prep point</span>
