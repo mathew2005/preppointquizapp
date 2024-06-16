@@ -25,7 +25,6 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('quiz/', include('quiz.urls')),
     path('accounts/', include('allauth.urls')),
-    path("__debug__/", include("debug_toolbar.urls")),
     # path('create',create, name="create")
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

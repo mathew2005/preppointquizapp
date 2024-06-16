@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-#4v#e4ur8=n!2yz@%t)=_05b@_)^w&)uh+fcc=m_9du4&9+pm_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-handler404 = 'base.views.custom_404'
 
 # mail = os.environ.get('MAIL')
 # mail_pass = os.environ.get('PASSWORD')
@@ -57,7 +56,6 @@ INSTALLED_APPS = [
     'base',
     'quiz',
     'ckeditor',
-    "debug_toolbar",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -76,7 +74,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 
@@ -94,6 +91,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'preppointquizapp.context_processors.user_profile',
+
             ],
         },
     },
@@ -160,7 +159,7 @@ ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_CHANGE_EMAIL = False
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = False
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_REAUTHENTICATION_REQUIRED = True
@@ -172,7 +171,9 @@ ACCOUNT_USERNAME_BLACKLIST = ['.git', '.htaccess', '.htpasswd', '.well-known', '
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/' # url
-STATIC_ROOT = BASE_DIR / 'staticfiles'# production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')# production
+
+
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static' # folder location
@@ -191,4 +192,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SOCIALACCOUNT_PROVIDERS = {
     
 
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/path/to/your/logfile.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }

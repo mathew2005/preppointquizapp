@@ -1,29 +1,132 @@
-{% extends "socialaccount/base_entrance.html" %}
 {% load i18n %}
 {% load allauth %}
-{% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    {% element p %}
-        {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
-{{site_name}}. As a final step, please complete the following form:{% endblocktrans %}
-    {% endelement %}
-    {% url 'socialaccount_signup' as action_url %}
-    {% element form form=form method="post" action=action_url %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" %}
-                {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-{% endblock content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Prep point</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+   
+ 
+    <style>
+       #confirm-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 2rem;
+
+
+}
+#confirm-page h1{
+    color: #2c4bff;
+    font-size: calc(2.5rem + 0.5vw);
+    
+}
+#content-container #username{
+    background: #2c4bff;
+    color: white;
+}
+#content-container{
+    max-width: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container h2{
+  font-size: 1rem;
+}
+#content-container p {
+color: red;
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+#warning-icon-container{
+  background: #66fa66;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+ #content-container input{
+    width: 100%;
+    height: 3rem;
+}
+#required-symbol{
+    color: red;
+}
+    </style>
+
+</head>
+<body>
+ {% include 'components/navbar.html' %}
+ {% include 'messages.html' %}
+
+ <main id="confirm-page">
+    <form id="content-container" method="POST" action="">
+      {% csrf_token %}
+      <div>
+
+      <span id="warning-icon-container">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="#024f02" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z"/></svg>
+      </span>
+    </div>
+
+        <div>
+
+            <h1>Finish Signing Up</h1>
+        </div>
+        <div>
+
+            <h2>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+                {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</h2>
+        </div>
+        <div>
+            <span>
+
+    <label for="email">Email address <span id="required-symbol">*</span></label>
+            </span>
+        </div>
+        <div>
+            <input type="email" name="email" id="email">
+        </div>
+        <div>
+            
+          
+          <input class="btn btn-primary" type="submit" value="Sign Up">
+        </div>
+    </form>
+</main>
+  {% include 'components/footer.html' %}
+
+  <!-- vendor and theme js  -->
+
+  <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+  <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+
+    
+</body>
+</html>

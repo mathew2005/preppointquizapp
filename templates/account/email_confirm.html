@@ -1,14 +1,83 @@
-{% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load account %}
 {% load allauth %}
-{% block head_title %}
-    {% trans "Confirm Email Address" %}
-{% endblock head_title %}
+{% load static %}
+
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Confirm Email Address" %}
-    {% endelement %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Email Address</title>
+
+
+    <!-- theme and vendor css  -->
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+
+    <style>
+        #error-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 2rem;
+}
+#error-page h1{
+    color: #2c4bff;
+    font-size: 7rem;
+
+}
+#icon-container{
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFE4E6;
+    border-radius: 50%;
+
+}
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container p {
+color: #586268;
+font-weight: 600;
+max-width: 40rem;
+}
+#content-container input[type='submit']{
+  margin-left: 1rem;
+}
+
+</style>
+
+</head>
+<body>
+    <main>
+
+        {% include 'components/navbar.html' %}
+        {% include 'messages.html' %}
+
+
+        
     {% if confirmation %}
         {% user_display confirmation.email_address.user as user_display %}
         {% if can_confirm %}
@@ -26,14 +95,48 @@
                 {% endslot %}
             {% endelement %}
         {% else %}
+
             {% element p %}
                 {% blocktrans %}Unable to confirm {{ email }} because it is already confirmed by a different account.{% endblocktrans %}
             {% endelement %}
         {% endif %}
     {% else %}
-        {% url 'account_email' as email_url %}
-        {% element p %}
-            {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
-        {% endelement %}
+    
+    <main id="error-page">
+        <div id="content-container">
+            <div>
+    
+                <span id="icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="red" d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m-1-4h2V7h-2zm1 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
+                </span>
+            </div>
+            <div>
+    
+                <h2>Verification Email Error!</h2>
+            </div>
+            <div>
+    
+                <p> This email confirmation link expired or is invalid. Please <a href="{% url 'contact' %}">contact our support team for help.</a></p>
+            </div>
+            <div>
+                
+                <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                
+            </div>
+        </div>
+    </main>
+       
+       
     {% endif %}
+
+{% include 'components/footer.html' %}
+    
+    
+        <!-- Theme JS -->
+        <!-- Vendor JS -->
+        <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+        <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+
+</body>
+</html>
 {% endblock content %}

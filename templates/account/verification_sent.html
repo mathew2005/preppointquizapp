@@ -11,13 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify your Email Address - Prep point</title>
 
-    <!-- favicon icons  -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../static/assets/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../static/assets/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon/favicon-16x16.png">
-    <link rel="mask-icon" href="../static/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    
 
     <!-- theme and vendor css  -->
     <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
@@ -25,7 +19,7 @@
 
 
     <style>
-        #error-page{
+        #verification-page{
 min-height: calc(100vh - 5rem);
 min-width: 100vw;
 display: flex;
@@ -33,7 +27,7 @@ align-items: center;
 justify-content: center;
 padding: 0 2rem;
 }
-#error-page h1{
+#verification-page h1{
     color: #2c4bff;
     font-size: 7rem;
 
@@ -59,7 +53,9 @@ color: #586268;
 font-weight: 600;
 max-width: 40rem;
 }
-
+#content-container input[type='submit']{
+  margin-left: 1rem;
+}
     </style>
 </head>
 <body>
@@ -68,7 +64,7 @@ max-width: 40rem;
     {% include 'messages.html' %}
 
 
-    <main id="error-page">
+    <main id="verification-page">
         <div id="content-container">
             <div>
     
@@ -85,6 +81,7 @@ max-width: 40rem;
             <div>
                 
                 <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                
             </div>
         </div>
     </main>

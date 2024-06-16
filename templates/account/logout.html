@@ -1,26 +1,104 @@
-{% extends "account/base_manage.html" %}
-
+{% load static %}
 {% load allauth i18n %}
-{% block head_title %}
-    {% trans "Sign Out" %}
-{% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    {% element p %}
-        {% trans 'Are you sure you want to sign out?' %}
-    {% endelement %}
-    {% url 'account_logout' as action_url %}
-    {% element form method="post" action=action_url no_visible_fields=True %}
-        {% slot body %}
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log out - Prep point</title>
+
+    <!-- theme and vendor css  -->
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+
+    <style>
+        #logout-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 2rem;
+}
+#icon-container {
+width: 5rem;
+height: 5rem;
+border-radius: 50%;
+background: #fcba03;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#logout-page h1{
+    color: #2c4bff;
+    font-size: 7rem;
+
+}
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#content-container div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container p {
+color: #586268;
+font-weight: 600;
+max-width: 40rem;
+}
+#content-container input[type='submit']{
+  margin-left: 1rem;
+}
+    </style>
+   </head>
+   <body>
+    
+    {% include 'components/navbar.html' %}
+    {% include 'messages.html' %}
+
+
+    <main id="logout-page">
+        <form id="content-container" method="POST" action="{% url 'account_logout' %}">
             {% csrf_token %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" %}
-                {% trans 'Sign Out' %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
+            <div>
+    
+                <span id="icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="#6e5101" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"/></svg>
+                </span>
+        </div>
+            <div>
+    
+                <h2>Log out</h2>
+            </div>
+            <div>
+    
+                <p>Are you sure you want to Log out?</p>
+            </div>
+            <div>
+                <a href="{% url 'home' %}" class="btn btn-primary">Go back</a>
+                <input type="submit" class="btn btn-danger" value="Log out">
+            </div>
+        </form>
+    </main>
+        {% include 'components/footer.html' %}
+    
+    
+        <!-- Theme JS -->
+        <!-- Vendor JS -->
+        <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+        <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+   </body>
+   </html>
 {% endblock content %}

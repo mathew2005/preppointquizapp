@@ -183,13 +183,7 @@ def contact_view(request):
 
         return redirect('contact')
 
-    if request.user.is_authenticated:
-        # request user
-        user_object = User.objects.get(username=request.user)
-        user_profile = Profile.objects.get(user=user_object)
-        context = {"user_profile": user_profile}
-    else:
-        context = {}
+    context = {}
     return render(request, "contact.html", context)
 
 @user_passes_test(is_superuser)
@@ -208,15 +202,8 @@ def message_view(request, id):
     return render(request, "message.html", context)
 
 
-def terms_conditions_view(request):
-
-    if request.user.is_authenticated:
-        # request user
-        user_object = User.objects.get(username=request.user)
-        user_profile = Profile.objects.get(user=user_object)
-        context = {"user_profile": user_profile}
-    else:
-        context = {}
+def terms_conditions_view(request):    
+    context = {}
     return render(request, "terms-conditions.html", context)
 
 @login_required(login_url='account_login')
@@ -240,39 +227,15 @@ def search_users_view(request):
     else:
         users = []
 
-    if request.user.is_authenticated:
-        # request user
-        user_object = User.objects.get(username=request.user)
-        user_profile = Profile.objects.get(user=user_object)
-        context = {"user_profile": user_profile, "query": query, "users": users}
-    else:
-        context = {"query": query, "users": users}
+    
+    context = {"query": query, "users": users}
     return render(request, "search-users.html", context)
 
 def home_view(request):
-    if request.user.is_authenticated:
-        # request user
-        user_object = User.objects.get(username=request.user)
-        user_profile = Profile.objects.get(user=user_object)
-        context = {"user_profile": user_profile}
-    else:
-        context = {}
-
+    context = {}
     return render(request, 'home.html', context)
 
 # def navbar_view(request):
 #     return render(request, 'components/navbar.html', {})
 
 
-from django.http import Http404
-from django.shortcuts import render
-
-def custom_404_view(request):
-    if request.user.is_authenticated:
-        # request user
-        user_object = User.objects.get(username=request.user)
-        user_profile = Profile.objects.get(user=user_object)
-        context = {"user_profile": user_profile}
-    else:
-        context = {}
-    return render(request,'404.html', context, status=404)

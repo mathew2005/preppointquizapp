@@ -2,6 +2,12 @@
     font-family: 'Circular Std';
     src: url('../fonts/CircularStd-Book.otf');
 }
+
+:root {
+  max-width: 100vw;
+  overflow-x: hidden !important;
+}
+
 #profile-image{
     cursor: pointer;
 }
