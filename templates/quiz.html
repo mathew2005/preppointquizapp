@@ -8,8 +8,8 @@
 <title>{{quiz.title}} - Preppoint</title>
 <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="{% static 'assets/css/quiz.css' %}">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     {% include 'components/navbar.html' %}
@@ -41,29 +41,29 @@
                 <div class="content-container">
 
                     <div class="circular-progress">
-                        
+
                         <span class="progress-value">0%</span>
                     </div>
-                    
+
                     <span class="text">SCORE</span>
                 </div>
-                
+
                 <div class="content-container">
 
                     <div class="circular-progress">
                 <span class="progress-value">
                     <span class="timer">—:—</span>
-                    
+
                 </span>
             </div>
-            
+
             <span class="text">TIME LEFT</span>
         </div>
             </div>
             <div id="score-div">
                 <p class="score"></p>
             </div>
-            
+
       </div>
       </div>
 
@@ -81,29 +81,29 @@
                 <!-- <span class="timer">00:00</span> -->
                 <div id="timer-text">TIMER</div>
             </div>
-            <div class="score"> 
+            <div class="score">
             </div>
         </div>
 
-        
-        <!-- javascript score message  -->
-        
-       
 
-        
+        <!-- javascript score message  -->
+
+
+
+
         <form method="post" id="quiz-form" autocomplete="off">
             {% csrf_token %}
-            
+
 
             <div class="questions my-4">
                 {% for question in quiz.question_set.all %}
                 <div class="card mb-2 question">
-                    
+
                     <div class="card-body">
-                        
+
                     <p class="card-text question-text">{{forloop.counter}}. {{question.text|safe}}</p>
                         {% for option in question.choice_set.all %}
-                         
+
                         <div class="form-check">
                             <label class="form-check-label" for="{{option.id}}">
                                 <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">
@@ -115,7 +115,7 @@
                         </div>
                         {% endfor %}
                         {% for explanation in question.explanation_set.all%}
-    
+
                     <div class="explanation hidden">Explanation: {{explanation.text|safe}}</div>
                         {% endfor %}
                     </div>
@@ -130,15 +130,14 @@
         </form>
 
     </div>
-    
-    {% include 'components/footer.html' %}
+
 
     <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
     <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
     <script src="{% static 'assets/js/quiz.js'%}"></script>
     <!-- Theme JS -->
     <!-- Vendor JS -->
-    
+
 
 
 </body>

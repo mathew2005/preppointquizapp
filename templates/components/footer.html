@@ -1,7 +1,7 @@
 {% load static %}
 
 <footer class="bg-dark pt-5 pb-8  ">
-    
+
     <!-- <div class="container">
         <div class="border-bottom border-white-10 pb-7">
             <div class="col-12 col-md-8 col-lg-6 d-flex mx-auto flex-column align-items-center justify-content-center">
@@ -42,7 +42,7 @@
 
                 <li class="ms-5 mb-2"><a target="_blank" href="https://www.facebook.com/share/V8XUGLqxAoDH3ray/?mibextid=qi2Omg" class="text-white text-decoration-none opacity-50-hover transition-opacity"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"/></svg></a>
                 </li>
-                
+
             </ul>
             <!-- Footer socials-->
         </div>
@@ -58,7 +58,7 @@
                     <li><a href="/#features">Timer Control</a></li>
                     <li><a href="/#features">Detailed Solutions</a></li>
                     <li><a href="/#features">Answer Reveal Options<span class="badge bg-danger rounded ms-2 align-middle">new</span></a>
-                        
+
                     </li>
                 </ul>
             </div>
@@ -68,11 +68,11 @@
             <div class="w-100 w-sm-50 w-lg-auto mb-4 mb-lg-0">
                 <h6 class="text-uppercase fs-xs fw-bolder tracking-wider text-white opacity-50">Quick links</h6>
                 <ul class="list-unstyled footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Exams</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Leaderboard</a></li>
-                    <li><a href="#">Blogs</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
+                    <li><a href="{% url 'all_quiz' %}">Quizzes</a></li>
+                    <li><a href="{% url 'quiz_settings' %}">Settings</a></li>
+                    <li><a href="#">Leaderboard<span class="badge bg-success rounded ms-2 align-middle" style="color: black;">Soon</span></a></li>
+                    <li><a href="#">Blogs<span class="badge bg-success rounded ms-2 align-middle" style="color: black;">Soon</span></a></li>
                 </ul>
             </div>
             <!-- /Menu-->
@@ -81,11 +81,11 @@
             <div class="w-100 w-sm-50 w-lg-auto mb-4 mb-lg-0">
                 <h6 class="text-uppercase fs-xs fw-bolder tracking-wider text-white opacity-50">Navigation</h6>
                 <ul class="list-unstyled footer-nav">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Help & support</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Forgotten password</a></li>
+                    <li><a href="{% url 'account_login' %}">Login</a></li>
+                    <li><a href="{% url 'account_signup' %}">Register</a></li>
+                    <li><a href="https://t.me/preppointsupport">Help & support</a></li>
+                    <li><a href="{% url 'contact' %}">Contact us</a></li>
+                    <li><a href="{% url 'account_reset_password' %}">Forgotten password</a></li>
                 </ul>
             </div>
             <!-- /Menu-->
@@ -94,11 +94,11 @@
             <div class="w-100 w-sm-50 w-lg-auto mb-4 mb-lg-0">
                 <h6 class="text-uppercase fs-xs fw-bolder tracking-wider text-white opacity-50">Legals</h6>
                 <ul class="list-unstyled footer-nav">
-                    <li><a href="#">Privacy policy</a></li>
-                    <li><a href="#">Terms & conditions</a></li>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy policy</a></li>
+                    <li><a href="{% url 'terms_of_service' %}">Terms of Service</a></li>
                     <li><a href="#">Cookie policy</a></li>
-                    <li><a href="#">Report a problem</a></li>
-                    <li><a href="#">Manage my data</a></li>
+                    <li><a href="{% url 'contact' %}">Report a problem</a></li>
+                    <li><a href="{% url 'user_data_deletion' %}">Delete my data</a></li>
                 </ul>
             </div>
             <!-- /Menu-->

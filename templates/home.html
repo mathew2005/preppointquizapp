@@ -9,25 +9,29 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="Prep Point is designed to help Grade 12 students prepare for their national university entrance exam by providing an online examination with an explanation.">
     <meta name="author" content="">
     <meta name="keywords" content="">
+    <meta property="og:title" content="Prep point">
+    <meta property="og:description" content="Prep Point is designed to help Grade 12 students prepare for their national university entrance exam by providing an online examination with an explanation." >
+
+    <meta property="og:image" content="{% static 'assets/images/preppointblue.jpg' %}">
+    <meta property="og:url" content="https://www.preppoint.co">
 
 
-    
 
-    
-    
-    
+
+
+
     <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
     <!-- home css  -->
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
 
-    
-    
-    
-    
+
+
+
+
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
@@ -42,7 +46,7 @@
 
     <!-- Page Title -->
     <title>Prep point</title>
-    
+
 </head>
 <body>
 
@@ -50,7 +54,7 @@
     {% include 'components/navbar.html' %}
 
     {% include 'messages.html' %}
-    
+
     <!-- Main Section-->
     <main class="mt-0 ">
         <!-- Page Content Goes Here -->
@@ -66,15 +70,16 @@
                     <!-- <h2 class="fs-5 text-muted fw-light lh-base">Collaborate, iterate and launch landing pages through our app or locally through our NPM package.</h2> -->
                     <a href="#" class="text-decoration-none text-primary fw-bolder d-flex fs-7 justify-content-center justify-content-lg-start" data-bs-toggle="modal"
                         data-bs-target="#videoIframeModal"
-                        data-pixr-video-iframe="https://player.vimeo.com/video/307721664?autoplay=1&amp;loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media"
+                        data-pixr-video-iframe="https://player.vimeo.com/video/962817680?autoplay=1&amp;loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media"
                         role="button"><i class="ri-play-circle-line align-bottom me-1"></i> How it works</a>
 
                     <div class="mt-4 pt-1 d-flex flex-column flex-md-row justify-content-center justify-content-lg-start">
-                        <a href="#" class="btn btn-success" role="button">Get started</a>
+                        <a href="{% url 'all_quiz' %}" class="btn btn-success" role="button">Get started</a>
                         <!-- <a href="#" class="btn btn-link text-decoration-none text-muted ms-2 bg-light-hover"
                             role="button">Start free trial</a> -->
                     </div>
-                    <ul class="list-unstyled d-none d-md-flex align-items-center small text-muted mt-3 pt-1 fw-medium fs-9 justify-content-center justify-content-lg-start">
+
+                    <!-- <ul class="list-unstyled d-none d-md-flex align-items-center small text-muted mt-3 pt-1 fw-medium fs-9 justify-content-center justify-content-lg-start">
                         <li class="me-4 d-flex align-items-center"><i
                                 class="ri-checkbox-circle-fill text-success ri-lg me-1"></i> No credit card required
                         </li>
@@ -82,7 +87,7 @@
                                 class="ri-checkbox-circle-fill text-success ri-lg me-1"></i> Cancel anytime</li>
                         <li class="me-4 d-flex align-items-center"><i
                                 class="ri-checkbox-circle-fill text-success ri-lg me-1"></i> 30 day free trial</li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <!-- / Hero Text-->
 
@@ -127,7 +132,7 @@
         <!-- /hero Content-->
 
         <!-- Logo Showcase-->
-        <div class="bg-primary py-8" data-aos="fade-in">
+        <!-- <div class="bg-primary py-8" data-aos="fade-in">
             <p class="mb-0 text-center small fw-bolder tracking-wider text-uppercase text-white opacity-75">Trusted by
                 thousands of schools nationwide</p>
             <div class="mt-5">
@@ -252,7 +257,7 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </div> -->
         <!-- Logo Showcase-->
 
         <!-- Integrations-->
@@ -308,7 +313,7 @@
                     <!-- /Integration-->
                 </div>
 
-                <a href="#" class="btn btn-white d-table mx-auto mt-7 w-100 w-md-auto" role="button">Get started now</a>
+                <a href="{% url 'all_quiz' %}" class="btn btn-white d-table mx-auto mt-7 w-100 w-md-auto" role="button">Get started now</a>
 
             </div>
         </div>
@@ -344,7 +349,7 @@
                                 </div>
                             </div>
                             <div
-                                class="p-3 bg-white shadow-lg rounded-3 f-w-56 mb-3 d-flex align-items-center me-0 ms-auto"  
+                                class="p-3 bg-white shadow-lg rounded-3 f-w-56 mb-3 d-flex align-items-center me-0 ms-auto"
                                 data-aos="fade-left" data-aos-duration="400" data-aos-delay="1500">
                                 <div class="position-relative me-4">
                                     <picture class="position-relative z-index-0">
@@ -377,7 +382,7 @@
                             </p>
                             <h4 class="fs-1 fw-bold mb-4 mt-3">Want to compete and see your rank?</h4>
                             <p class="text-muted">Use our leaderboard to see where you rank at the national level</p>
-                            <a href="{% url 'account_signup' %}" class="btn btn-link px-0 me-3 fw-medium text-decoration-none mt-4"
+                            <a href="{% url 'all_quiz' %}" class="btn btn-link px-0 me-3 fw-medium text-decoration-none mt-4"
                                 role="button">Let's get started &rarr;</a>
                         </div>
 
@@ -407,7 +412,7 @@
                         <!-- /Hightlight Two SVG Shape-->
 
                         <div class="position-absolute bottom-3 start-5 z-index-30 d-none d-lg-block" data-aos="fade-in" data-aos-duration="350" data-aos-delay="200">
-                            
+
                             <div class="p-3 bg-white shadow-lg rounded-3 f-w-16 mb-3">
                                 <picture class="position-relative z-index-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 256 262"><path fill="#4285f4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622l38.755 30.023l2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path><path fill="#34a853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055c-34.523 0-63.824-22.773-74.269-54.25l-1.531.13l-40.298 31.187l-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path><path fill="#fbbc05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82c0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602z"></path><path fill="#eb4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path></svg>
@@ -423,7 +428,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 256 256"><path fill="#1877f2" d="M256 128C256 57.308 198.692 0 128 0C57.308 0 0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445"></path><path fill="#fff" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z"></path></svg>
                                 </picture>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!-- /Highlight Two Image Section-->
@@ -435,7 +440,7 @@
                             </p>
                             <h4 class="fs-1 fw-bold mb-4 mt-3">Ditch the paper mess & stress!</h4>
                             <p class="text-muted">Focus on what's important: studying & practicing! Easily login with Google, Telegram or Facebook.</p>
-                            <a href="{% url 'account_signup' %}" class="btn btn-link px-0 me-3 fw-medium text-orange text-decoration-none mt-4"
+                            <a href="{% url 'all_quiz' %}" class="btn btn-link px-0 me-3 fw-medium text-orange text-decoration-none mt-4"
                                 role="button">Let's get started &rarr;</a>
                         </div>
 
@@ -450,15 +455,17 @@
         <!-- /Product Highlights-->
 
         <!-- Customer Reviews-->
-        <div class="pb-10">
+        <!-- <div class="pb-10">
             <div class="container">
                 <p class="mb-3 small fw-bolder tracking-wider text-uppercase text-primary text-center">Our Feedback</p>
                 <h4 class="fs-1 fw-bold mb-6 text-center col-12 col-sm-6 col-md-5 col-lg-6 col-xl-4 mx-auto">What our students are saying about us</h4>
                 <div class="mt-3 d-flex justify-content-center flex-column flex-md-row">
                     <a href="#" class="btn btn-primary mb-2 mb-md-0" role="button">Ready to get started?</a>
-                    <!-- <a href="#" class="btn btn-link text-decoration-none text-muted ms-md-2 bg-light-hover" role="button">Start
-                        your free trial</a> -->
-                </div>
+
+                    <a href="#" class="btn btn-link text-decoration-none text-muted ms-md-2 bg-light-hover" role="button">Start
+                        your free trial</a>
+
+                    </div>
             </div>
             <div class="mt-5">
                 <section class="marquee marquee-hover-pause">
@@ -726,17 +733,19 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </div> -->
+
         <!-- /Customer Reviews-->
 
         <!-- Latest Blog Posts-->
-        <div class="bg-primary py-10">
+        <!-- <div class="bg-primary py-10">
             <div class="container">
                 <h4 class="fs-1 fw-bold mb-6 text-white text-center">Our latest articles</h4>
 
                 <div class="row g-5">
 
-                    <!-- Blog Post-->
+
+
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div
                             class="d-flex h-100 bg-white rounded card overflow-hidden shadow-lg position-relative hover-lift">
@@ -750,8 +759,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Blog Post-->
-                    <!-- Blog Post-->
+
+
+
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div
                             class="d-flex h-100 bg-white rounded card overflow-hidden shadow-lg position-relative hover-lift">
@@ -765,8 +775,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Blog Post-->
-                    <!-- Blog Post-->
+
+
+
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div
                             class="d-flex h-100 bg-white rounded card overflow-hidden shadow-lg position-relative hover-lift">
@@ -780,16 +791,15 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Blog Post-->
 
                 </div>
 
                 <a href="{% url 'blogs' %}" class="btn btn-white mx-auto mt-7 d-table fw-medium w-100 w-md-auto">More articles &rarr;</a>
             </div>
-        </div>
+        </div> -->
         <!-- / Latest Blog Posts-->
 
-    
+
 
         <!-- About Us-->
         <div class="pt-10 bg-light">
@@ -798,7 +808,7 @@
                     <h4 class="fs-1 fw-bold mb-4">Who we are</h4>
 
                     <!-- Stats-->
-                    <div class="my-5 d-none d-md-flex align-items-start justify-content-between">
+                    <!-- <div class="my-5 d-none d-md-flex align-items-start justify-content-between">
                         <div>
                             <span class="display-3 fw-bold text-primary d-block">30</span>
                             <span
@@ -813,7 +823,9 @@
                             <span class="display-3 fw-bold text-primary d-block">160</span>
                             <span class="d-block fs-9 fw-bolder tracking-wide text-uppercase text-muted">Schools</span>
                         </div>
-                    </div>                    <!-- / Stats-->
+                    </div>                   -->
+
+                    <!-- / Stats-->
 
                     <p>Prep point was founded by students who struggled to find matric practice exams online,<a href="#"> it was made by and for students</a>, Initial Developments started on 2023 <a href="#">and officialy released in 2024</a>. We want everyone to not only pass matric, but do so with flying colors</p>
                     <a href="{% url 'about' %}" class="btn btn-success mt-4">Find out more</a>
@@ -826,7 +838,7 @@
                         alt="HTML Bootstrap Template by Pixel Rocket">
                 </picture> -->
                 <div id="team-image">
-                    
+
                 </div>
                 <!-- SVG shapes-->
                 <div class="position-absolute top-0 end-0 start-0 bottom-0 z-index-0 d-none d-lg-block">
@@ -878,7 +890,7 @@
     <!-- Footer-->
     {% include 'components/footer.html' %}
     <!-- / Footer-->
-    
+
     <!-- Additional imports (modals, offcanvas)-->
     <!-- Modal Imports-->
     <!-- Video Modal Iframe-->
@@ -895,7 +907,7 @@
                     class="btn btn-link text-decoration-none text-white opacity-75-hover transition-all position-absolute end-0 top-0 z-index-20"
                     data-bs-dismiss="modal"
                     aria-label="Close"><i class="ri-close-fill"></i></button>
-    
+
                     <!-- Plyr HTML-->
                     <div id="player" class="modal-video-player plyr__video-embed">
                         <iframe

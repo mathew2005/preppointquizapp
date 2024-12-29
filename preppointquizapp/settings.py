@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-# import os
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,24 +23,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#4v#e4ur8=n!2yz@%t)=_05b@_)^w&)uh+fcc=m_9du4&9+pm_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
-# mail = os.environ.get('MAIL')
-# mail_pass = os.environ.get('PASSWORD')
+from dotenv import load_dotenv
+
+load_dotenv()
+
+mail = os.getenv('MAIL')
+mail_pass = os.getenv('PASSWORD')
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "test.mailed.login@gmail.com"
-# EMAIL_HOST_USER = mail
-EMAIL_HOST_PASSWORD = "dtdbhapyjwpelknq"
-# EMAIL_HOST_PASSWORD = mail_pass
-DEFAULT_FROM_EMAIL = "test.mailed.login@gmail.com"
-# DEFAULT_FROM_EMAIL = mail
+EMAIL_HOST_USER = mail
+EMAIL_HOST_PASSWORD = mail_pass
+DEFAULT_FROM_EMAIL = mail
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.231", "192.168.164.7", '192.168.223.7', '192.168.0.19', '192.168.0.18']
+
+ALLOWED_HOSTS = [ "www.preppoint.co", 'localhost', '127.0.0.1',]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
@@ -83,7 +85,7 @@ ROOT_URLCONF = 'preppointquizapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,6 +155,8 @@ USE_TZ = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_USERNAME_REQUIRED = False
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED=True
@@ -190,37 +194,7 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SOCIALACCOUNT_PROVIDERS = {
-    
+
 
 }
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/path/to/your/logfile.log',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}

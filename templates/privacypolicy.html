@@ -1,0 +1,212 @@
+{% load static %}
+{% load i18n %}
+{% load allauth %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify your Email Address - Prep point</title>
+
+    
+
+    <!-- theme and vendor css  -->
+    <link rel="stylesheet" href="{% static 'assets/css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/theme.bundle.css' %}" />
+
+
+    <style>
+        #verification-page{
+min-height: calc(100vh - 5rem);
+min-width: 100vw;
+
+padding: 0 2rem;
+display: flex;
+width: 100vw;
+justify-content: center;
+flex-wrap: wrap;
+}
+#verification-page h1{
+    color: #2c4bff;
+    font-size: 7rem;
+
+}
+#content-container{
+   max-width: 40rem;
+
+}
+#content-container div{
+    width: 100%;
+    /* flex-wrap: wrap; */
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+#content-container #icon-container {
+    background: #66fa66 ;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+#content-container span {
+font-weight: 500;
+}
+#content-container input[type='submit']{
+  margin-left: 1rem;
+}
+    </style>
+</head>
+<body>
+    
+    {% include 'components/navbar.html' %}
+    {% include 'messages.html' %}
+
+
+    <main id="verification-page">
+        <div id="content-container">
+    <div>
+
+        <span id="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 512 512"><path fill="#024f02" d="M428 224H288a48 48 0 0 1-48-48V36a4 4 0 0 0-4-4h-92a64 64 0 0 0-64 64v320a64 64 0 0 0 64 64h224a64 64 0 0 0 64-64V228a4 4 0 0 0-4-4"/><path fill="currentColor" d="M419.22 188.59L275.41 44.78a2 2 0 0 0-3.41 1.41V176a16 16 0 0 0 16 16h129.81a2 2 0 0 0 1.41-3.41"/></svg>
+        </span>
+    </div>
+    <div>
+
+        <h2>Privacy Policy</h2>
+    </div>
+    <div>
+
+        <span>
+            <p>
+
+                Last Updated: 17/06/2024 <br>
+                Introduction<br>
+            </p>
+        <p>
+
+            Welcome to Preppoint! We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <a href="www.preppoint.co">www.preppoint.co</a> or use our services. Please read this policy carefully to understand our views and practices regarding your personal data and how we will treat it. <br>
+        </p>
+        <p>
+            
+            1. Information We Collect<br>
+        </p>        
+            <p>
+
+                Personal Information<br>
+                
+                We may collect the following types of personal information:<br>
+                
+                Contact Information: Name and email address. <br>
+                Account Information: Username, password, profile picture.<br>
+                Payment Information: None<br>
+                Educational Information: Scores on Each Quiz<br>
+            </p>
+            <p>
+                
+                
+                Non-Personal Information<br>
+                
+                We may also collect non-personal information, including:<br>
+                
+                Device Information: IP address, browser type, operating system.<br>
+                Usage Data: Pages viewed, time spent on pages, clicks, and other analytical data.
+            </p>
+                <p>
+
+                    2. How We Use Your Information<br>
+                    
+                    We use the information we collect for the following purposes:<br>
+                    
+                    To Provide and Maintain Our Services: Including account management, customer support, and delivering course content.<br>
+    To Improve Our Services: Analyzing usage data to enhance the user experience and develop new features.<br>
+    To Communicate with You: Sending updates, newsletters, and promotional materials (you can opt-out at any time).<br>
+    To Process Payments: Handling transactions securely through third-party payment processors.<br>
+    To Comply with Legal Obligations: Ensuring compliance with applicable laws and regulations.<br>
+</p>
+    <p>
+
+        3. How We Share Your Information<br>
+        
+        We do not sell or rent your personal information to third parties. We may share your information with:<br>
+        
+        Service Providers: Third-party vendors who perform services on our behalf, such as hosting services, and customer service.<br>
+        Business Transfers: In the event of a merger, acquisition, or sale of all or a portion of our assets.<br>
+        Legal Requirements: If required by law or in response to valid requests by public authorities (e.g., a court or government agency).<br>
+    </p>
+        <p>
+            4. Security of Your Information<br>
+            
+            We use administrative, technical, and physical security measures to protect your personal information. While we strive to use commercially acceptable means to protect your personal data, we cannot guarantee its absolute security.<br>
+        </p>
+        <p>
+
+            5. Your Data Protection Rights<br>
+            
+            Depending on your location, you may have the following rights regarding your personal data: <br>
+            
+            Access: The right to request copies of your personal information.<br>
+            Correction: The right to request correction of any inaccurate or incomplete information. <br>
+            Deletion: The right to request deletion of your personal information under certain conditions. <br>
+            Restrict Processing: The right to request that we restrict the processing of your personal information. <br>
+            Data Portability: The right to request the transfer of your data to another organization or directly to you under certain conditions.<br>
+            
+            To exercise any of these rights, please contact us at <a href="mailto:preppointer@gmail.com" >preppointer@gmail.com</a>
+        </p>
+
+        <p>
+
+            6. Cookies and Tracking Technologies <br>
+            
+            We use cookies and similar tracking technologies to track activity on our service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our service.
+        </p>
+        <p>
+
+            7. Third-Party Links <br>
+            
+            Our service may contain links to third-party websites. We do not control and are not responsible for the content, privacy policies, or practices of any third-party sites or services.
+        </p>
+        <p>
+
+            8. Changes to This Privacy Policy <br>
+            
+            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+        </p>
+        <p>
+
+            9. Contact Us<br>
+            
+            If you have any questions about this Privacy Policy, please contact us:<br>
+            Email : <a href="mailto:preppointer@gmail.com">preppointer@gmail.com </a><br>
+            Telegram : <a href="https://t.me/preppointsupport">@preppointsupport</a> <br>
+            By using our services, you consent to the terms of this Privacy Policy.
+            
+        </p>
+
+        </span>
+    </div>
+        <div>
+
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>        
+                
+        </div>
+    </main>
+        {% include 'components/footer.html' %}
+    
+    
+        <!-- Theme JS -->
+        <!-- Vendor JS -->
+        <script src="{% static 'assets/js/theme.bundle.js' %}"></script>
+        <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+    
+</body>
+</html>
+
+{% endblock %}
+
