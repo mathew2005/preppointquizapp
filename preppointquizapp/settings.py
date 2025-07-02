@@ -42,7 +42,7 @@ EMAIL_HOST_PASSWORD = mail_pass
 DEFAULT_FROM_EMAIL = mail
 
 
-ALLOWED_HOSTS = [ "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [ "www.preppoint.co", 'localhost', '127.0.0.1',]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
