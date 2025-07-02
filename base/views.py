@@ -74,7 +74,7 @@ def dashboard_view(request):
     messages = Message.objects.filter(created_at__date=datetime.date.today()).order_by('-created_at')
 
 
-    context = {"user_profile": user_profile, 
+    context = {"user_profile": user_profile,
                "total_users": total_users,
                "total_quizzes": total_quizzes,
                "total_quiz_submit": total_quiz_submit,
@@ -129,7 +129,7 @@ def blog_view(request, blog_id):
     user_profile = Profile.objects.get(user=user_object)
 
     blog = Blog.objects.filter(id=blog_id).first()
-    
+
     context = {"user_profile": user_profile, "blog": blog}
     return render(request, "blog.html", context)
 
@@ -202,16 +202,13 @@ def message_view(request, id):
     return render(request, "message.html", context)
 
 
-def terms_conditions_view(request):    
-    context = {}
-    return render(request, "terms-conditions.html", context)
 
 @login_required(login_url='account_login')
 def downloads_view(request):
 
     user_object = User.objects.get(username=request.user)
     user_profile = Profile.objects.get(user=user_object)
-    
+
     context = {"user_profile": user_profile}
     return render(request, "downloads.html", context)
 
@@ -227,7 +224,7 @@ def search_users_view(request):
     else:
         users = []
 
-    
+
     context = {"query": query, "users": users}
     return render(request, "search-users.html", context)
 
@@ -238,4 +235,15 @@ def home_view(request):
 # def navbar_view(request):
 #     return render(request, 'components/navbar.html', {})
 
+def privacy_policy_view(request):
+    context = {}
+    return render(request, 'privacypolicy.html', context)
 
+
+def user_data_deletion_view(request):
+    context = {}
+    return render(request, 'userdatadeletion.html', context)
+
+def terms_of_service_view(request):
+    context = {}
+    return render(request,'termsofservice.html', context)
